@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('requirements');
             $table->float('salary');
             $table->date('deadline');
-            $table->unsignedInteger('created_at');
+            $table->timestamps();
         });
 
         Schema::create('job_batches', function (Blueprint $table) {

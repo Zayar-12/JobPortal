@@ -22,7 +22,7 @@ class Job extends Model
       return $this->belongsTo(Company::class,'company_id');
    }
 
-   public function jobApplication():HasMany{
+   public function jobApplications():HasMany{
       return $this->hasMany(JobApplication::class,'job_id');
    }
 }
