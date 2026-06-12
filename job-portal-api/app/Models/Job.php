@@ -9,20 +9,29 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Job extends Model
 {
    protected $fillable = [
-    'company_id',
-    'title',
-    'description',
-    'requirements',
-    'salary',
-    'deadline'
+      'company_id',
+      'category_id',
+      'title',
+      'description',
+      'requirements',
+      'salary',
+      'location',
+      'deadline'
    ];
 
 
-   public function company():BelongsTo{
-      return $this->belongsTo(Company::class,'company_id');
+   public function company(): BelongsTo
+   {
+      return $this->belongsTo(Company::class, 'company_id');
    }
 
-   public function jobApplications():HasMany{
-      return $this->hasMany(JobApplication::class,'job_id');
+   public function jobApplications(): HasMany
+   {
+      return $this->hasMany(JobApplication::class, 'job_id');
+   }
+
+   public function category(): BelongsTo
+   {
+      return $this->belongsTo(Category::class, 'category_id');
    }
 }

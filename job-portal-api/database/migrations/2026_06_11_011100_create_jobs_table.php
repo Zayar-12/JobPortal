@@ -14,10 +14,12 @@ return new class extends Migration
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('company_id')->constrained('companies')->cascadeOnDelete();
+            $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete();
             $table->string('title');
             $table->text('description');
             $table->text('requirements');
             $table->float('salary');
+            $table->string('location')->nullable();
             $table->date('deadline');
             $table->timestamps();
         });

@@ -17,11 +17,14 @@ class JobResource extends JsonResource
         return [
             'id'=>$this->id,
              'company_id'=>$this->company_id,
+             'category_id'=>$this->category_id,
     'title'=>$this->title,
     'description'=>$this->description,
     'requirements'=>$this->requirements,
     'salary'=>$this->salary,
+    'location'=>$this->location,
     'deadline'=>$this->deadline,
+    'company'=>$this->company,
         ];
     }
 }

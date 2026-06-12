@@ -24,11 +24,13 @@ class JobRequest extends FormRequest
     public function rules(): array
     {
         return [
-        'title'        => ['required', 'string', 'min:4'],
-        'description'  => ['required', 'string', 'min:4'], 
-        'requirements' => ['required', 'string', 'min:4'],
-        'salary'       => ['required', 'numeric'],       
-        'deadline'     => ['required', 'date'],
+            'title'        => ['required', 'string', 'min:4'],
+            'description'  => ['required', 'string', 'min:4'],
+            'requirements' => ['required', 'string', 'min:4'],
+            'salary'       => ['required', 'numeric'],
+            'deadline'     => ['required', 'date'],
+            'category_id'  => ['required', 'exists:categories,id'], // Must exist in categories table
+            'location'     => ['nullable', 'string'],
         ];
     }
 
@@ -36,14 +38,18 @@ class JobRequest extends FormRequest
     public function messages()
     {
         return [
-        'title.required'        => 'The job title is required.',
-        'title.min'             => 'The job title must be at least 4 characters long.',
-        'description.required'  => 'The job description is required.',
-        'requirements.required' => 'The job requirements are required.',
-        'salary.required'       => 'The salary amount is required.',
-        'salary.numeric'        => 'The salary must be a number.',
-        'deadline.required'     => 'The application deadline is required.',
-        'deadline.date'         => 'The deadline must be a valid date.',
+            'title.required'        => 'The job title is required.',
+            'title.min'             => 'The job title must be at least 4 characters long.',
+            'description.required'  => 'The job description is required.',
+            'requirements.required' => 'The job requirements are required.',
+            'salary.required'       => 'The salary amount is required.',
+            'salary.numeric'        => 'The salary must be a number.',
+            'deadline.required'     => 'The application deadline is required.',
+            'deadline.date'         => 'The deadline must be a valid date.',
+            'category_id.required' => 'Please select a job category.',
+            'category_id.exists'   => 'The selected category is invalid.',
+            'location.string'      => 'The location must be a valid text.',
+
         ];
     }
 }

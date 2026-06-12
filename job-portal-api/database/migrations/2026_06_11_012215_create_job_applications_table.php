@@ -15,9 +15,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('job_id')->constrained('jobs')->cascadeOnDelete();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->unique(['job_id', 'user_id']);
             $table->string('cv_path');
-            $table->boolean('status');
-            $table->timestamp('applied_at');
+            $table->enum('status', ['pending', 'accepted', 'rejected'])->default('pending');
+            // $table->timestamp('applied_at');
             $table->timestamps();
         });
     }
