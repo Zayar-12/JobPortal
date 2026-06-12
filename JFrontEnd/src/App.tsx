@@ -1,10 +1,30 @@
-import React from 'react'
+
+import { createBrowserRouter, RouterProvider } from 'react-router'
+import Layout from './Layout/Layout'
+import Home from './Pages/Home'
+import { ContextProvider } from './Context/context'
 
 const App = () => {
+
+
+  const router=createBrowserRouter([
+
+   {
+    path:"/",
+    element:<Layout/>,
+    children:[
+      {
+        index:true,
+        element:<Home/>,
+      }
+    ]
+   }
+
+  ])
   return (
-    <h1 className="text-3xl font-bold underline">
-    Hello world!
-  </h1>
+   <ContextProvider >
+     <RouterProvider router={router}/>
+    </ContextProvider>
   )
 }
 

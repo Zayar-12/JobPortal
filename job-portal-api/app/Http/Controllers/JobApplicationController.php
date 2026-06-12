@@ -23,6 +23,11 @@ class JobApplicationController extends Controller
 
 
         $user = $request->user();
+        if($user->role != 'user'){
+              return response()->json([
+                "message" => "Your role is not user"
+            ]);
+        }
         $job_id = $request->job_id;
         $job = Job::find($job_id);
         if (!$job) {
