@@ -1,5 +1,5 @@
 import React from 'react'
-import { useLoaderData } from 'react-router'
+import { NavLink, useLoaderData } from 'react-router'
 import type { Job } from '../types/types';
 
 const SelectedCategory = () => {
@@ -14,7 +14,9 @@ const SelectedCategory = () => {
          jobs? <div>
           {
             jobs.map((job:Job)=>(
-              <h1 key={job.id}>{job.title}</h1>
+              <h1 key={job.id}>
+                <NavLink to={`/userJobs/${job.id}`}>{job.title}</NavLink>
+              </h1>
             ))
           }
          </div>:"no jobs"

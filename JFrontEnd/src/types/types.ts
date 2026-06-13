@@ -20,3 +20,14 @@ export interface Job{
     location:string,
     deadline:Date
 }
+
+export interface Company{
+    id:string,
+    name:string,
+    description:string,
+    location:string,
+    logo:string,
+    website:string,
+    employer_id?:string,
+    uploaded_jobs?:Job[]
+}

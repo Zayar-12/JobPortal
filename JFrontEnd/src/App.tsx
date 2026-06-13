@@ -16,6 +16,9 @@ import SelectedCategory from './Pages/SelectedCategory'
 import { loadSelectedCategoryJob } from './Loaders/selectedCategoryPage'
 import SpecificJob from './Pages/SpecificJob'
 import { loadSpecificJob } from './Loaders/specificJobPage'
+import { loadAllCompany } from './Loaders/allCompanyPage'
+import SpecificCompany from './Pages/SpecificCompany'
+import { loadCompanyWithJob } from './Loaders/specificCompanyPage'
 
 const App = () => {
 
@@ -41,7 +44,14 @@ const App = () => {
       },
       {
         path:"/allcompanies",
-        element:<AllCompanies/>
+        element:<AllCompanies/>,
+        loader:loadAllCompany
+      },
+       {
+        path:"/allcompanies/:id",
+        element:<SpecificCompany/>,
+        loader:loadCompanyWithJob
+        
       },
       {
         path:"/jobbycategory",
