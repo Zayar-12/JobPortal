@@ -1,14 +1,17 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useState, } from "react";
+import type { ContextType } from "../types/types";
 
  
 
- const context=createContext<any>(null);
+ const context=createContext<ContextType | undefined>(undefined);
 
 
  export const ContextProvider=({children}:{children:React.ReactNode})=>{
+     const[token,setToken]=useState<string>(localStorage.getItem('token') || "");
+     const [search,setSearch]=useState<string>("");
 
 return (
-    <context.Provider value={""}>
+    <context.Provider value={{ token, setToken,search ,setSearch }}>
      {children}
     </context.Provider>
 )

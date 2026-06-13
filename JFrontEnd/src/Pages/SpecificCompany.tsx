@@ -1,5 +1,5 @@
 import React from 'react'
-import { useLoaderData } from 'react-router'
+import { useLoaderData, NavLink } from 'react-router'
 import type { Company } from '../types/types'
 
 const SpecificCompany = () => {
@@ -12,7 +12,9 @@ const SpecificCompany = () => {
       <div>{
 
         jobs && jobs.map((j)=>(
-          <h1>{j.title}</h1>
+           <div key={j.id}>
+            <NavLink to={`/userJobs/${j.id}`}>{j.title}</NavLink>
+           </div>
         ))
         }
       </div>

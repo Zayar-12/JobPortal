@@ -6,7 +6,25 @@ export interface Category{
     icon:string,
 
 }
+ 
+export interface JobApplicationType{
+    job_id:string,
+    cv_path:string,
+}
 
+export interface ContextType{
+    token:string,
+    setToken:(token:string)=>void,
+    search:string,
+    setSearch:(value:string)=>void,
+}
+
+export interface Auth{
+    name?:string,
+     email:string,
+     password:string,
+     password_confirmation?:string,
+}
 
 export interface Job{
     id:string,

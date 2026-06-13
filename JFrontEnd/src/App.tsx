@@ -19,6 +19,7 @@ import { loadSpecificJob } from './Loaders/specificJobPage'
 import { loadAllCompany } from './Loaders/allCompanyPage'
 import SpecificCompany from './Pages/SpecificCompany'
 import { loadCompanyWithJob } from './Loaders/specificCompanyPage'
+import { ApplyJobAction } from './Actions/applyJob'
 
 const App = () => {
 
@@ -55,7 +56,8 @@ const App = () => {
       },
       {
         path:"/jobbycategory",
-        element:<JobByCategory/>
+        element:<JobByCategory/>,
+        loader:loadAllCategories
       },
       {
         path:"/category/:categoryId",
@@ -66,6 +68,7 @@ const App = () => {
           path:"/userJobs/:id",
         element:<SpecificJob/>,
         loader:loadSpecificJob,
+        action:ApplyJobAction
       },
     ]
    },
