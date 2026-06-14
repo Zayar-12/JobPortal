@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\CompanyAuth;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CompanyJobController;
@@ -23,3 +24,4 @@ Route::middleware(['auth:sanctum'])->group(function () {
 Route::apiResource('allCompaines',CompanyController::class);
 Route::apiResource('userJobs', UserJobController::class);
 Route::apiResource('categories', CategoryController::class);
+Route::post('/register-company',[CompanyAuth::class,'companyRegister']);

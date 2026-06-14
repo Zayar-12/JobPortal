@@ -23,6 +23,7 @@ class CompanyResource extends JsonResource
     "location"=>$this->location,
     "website"=>$this->website,
     "uploaded_jobs"=>JobResource::collection($this->whenLoaded('jobs'))
+    
         ];
     }
 }

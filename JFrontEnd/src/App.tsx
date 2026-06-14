@@ -20,6 +20,9 @@ import { loadAllCompany } from './Loaders/allCompanyPage'
 import SpecificCompany from './Pages/SpecificCompany'
 import { loadCompanyWithJob } from './Loaders/specificCompanyPage'
 import { ApplyJobAction } from './Actions/applyJob'
+import { companyRegisterAction, createJobAction } from './Actions/company'
+import Dashboard from './Pages/Company/Dashboard'
+
 
 const App = () => {
 
@@ -88,7 +91,14 @@ const App = () => {
          },
          {
           path:"companyregister",
-          element:<CompanyRegister/>
+          element:<CompanyRegister/>,
+          action:companyRegisterAction
+         },
+         {
+          path:"dashboard",
+          element:<Dashboard/>,
+          loader:loadAllCategories,
+          action:createJobAction
          }
         
         ]
