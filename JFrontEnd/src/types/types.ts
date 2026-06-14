@@ -9,7 +9,7 @@ export interface Category{
  
 export interface JobApplicationType{
     job_id:string,
-    cv_path:string,
+    cv_path:File,
 }
 
 export interface ContextType{

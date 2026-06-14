@@ -5,12 +5,15 @@ import type { JobApplicationType } from "../types/types";
  export const JobApplication= async({cv_path,job_id}:JobApplicationType)=>{
 try {
     const token=localStorage.getItem('token');
-        const res= await axiosClient.post('/jobApplication',{
-            cv_path:cv_path,
-            job_id:job_id
-        },{
-             headers:{ 'Accept': 'application/json',
-                 'Content-Type':'application/json',
+
+    const formData = new FormData();
+    formData.append('cv_path',cv_path);
+    formData.append('job_id',job_id);
+        const res= await axiosClient.post('/jobApplication',
+           formData
+        ,{
+             headers:{ 
+                 
                 'Authorization': `Bearer ${token}`,
              }
         })

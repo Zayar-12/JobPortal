@@ -21,10 +21,10 @@ const SpecificJob = () => {
       {
         token?<div>
               <h1>Form</h1>
-         <Form method='post' className="space-y-6">
+         <Form method='post' encType="multipart/form-data" className="space-y-6">
             <h1>{path}</h1>
             <input type="text" name='job_id' value={specificJob.id} /><br />
-          <input type="text" name='cv_path' placeholder='fill the lin of the cv' required onChange={(e)=>{setPath(e.target.value)}} />
+          <input type="file" name='cv_path' placeholder='Upload you cv here' required />
 
           <button 
             type='submit'

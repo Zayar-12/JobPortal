@@ -23,7 +23,8 @@ class JobApplicationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "cv_path"=>['required']
+            "cv_path"=>['required','file', 'mimes:pdf,doc,docx', 'max:2048'],
+             "job_id"   => ['required', 'exists:jobs,id'],
         ];
     }
 }

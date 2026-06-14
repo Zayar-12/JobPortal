@@ -23,8 +23,8 @@ class JobApplicationController extends Controller
 
 
         $user = $request->user();
-        if($user->role != 'user'){
-              return response()->json([
+        if ($user->role != 'user') {
+            return response()->json([
                 "message" => "Your role is not user"
             ]);
         }
@@ -45,15 +45,27 @@ class JobApplicationController extends Controller
             ], 409);
         }
 
-        
+
         $data = $request->validated();
+
+        if ($request->hasFile('cv_path')) {
+            $path = $request->file('cv_path')->store('cv_files', 'public');
+            $data['cv_path'] = $path;
+        } else {
+            return response()->json([
+                "message" => "Please upload your CV file."
+            ], 422);
+        }
 
 
         $data["job_id"] = $job->id;
         $data['user_id'] = $user->id;
         $newJobApplication = JobApplication::create($data);
 
-        return $newJobApplication;
+        return response()->json([
+            "message" => "Application submitted successfully.",
+            "data" => $newJobApplication
+        ], 201);
     }
 
     /**
