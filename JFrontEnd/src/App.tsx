@@ -21,6 +21,8 @@ import SpecificCompany from './Pages/SpecificCompany'
 import { loadCompanyWithJob } from './Loaders/specificCompanyPage'
 import { ApplyJobAction } from './Actions/applyJob'
 import { companyRegisterAction, createJobAction } from './Actions/company'
+
+import UploadJob from './Pages/Company/UploadJob'
 import Dashboard from './Pages/Company/Dashboard'
 
 
@@ -77,7 +79,7 @@ const App = () => {
    },
    {
                 
-        path:"/compaines",
+        path:"/companies",
         element:<CompanyLayout/>,
         children:[
           {
@@ -95,8 +97,15 @@ const App = () => {
           action:companyRegisterAction
          },
          {
-          path:"dashboard",
+          path:"dashboard/:id",
           element:<Dashboard/>,
+          loader:loadCompanyWithJob
+
+          
+         },
+         {
+          path:"uploadJob",
+          element:<UploadJob/>,
           loader:loadAllCategories,
           action:createJobAction
          }

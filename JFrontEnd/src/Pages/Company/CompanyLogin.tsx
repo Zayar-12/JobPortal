@@ -30,7 +30,7 @@ try {
 
         const role=localStorage.getItem('role');
         if(role === "employer"){
-          navigate("/compaines/dashboard");
+          navigate("/companies/dashboard");
         }else{
             navigate("/");
         }

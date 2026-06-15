@@ -12,11 +12,11 @@ export const companyRegisterAction = async ({ request }: ActionFunctionArgs) => 
       
         if (res.data && res.data.token) {
             localStorage.setItem('token', res.data.token);
-                 localStorage.setItem('company_id', res.data.company_id);
+            localStorage.setItem('company_id', res.data.company_id);
           
         }
 
-        return redirect('/compaines/dashboard'); 
+        return redirect(`/companies/dashboard/${localStorage.getItem('company_id')}`); 
     } catch (error: any) {
         return error.response?.data;
     }
@@ -40,7 +40,7 @@ export const createJobAction = async ({ request }: ActionFunctionArgs) => {
         }
              }
         );
-        return redirect('/compaines/dashboard'); 
+        return redirect(`/companies/dashboard/${localStorage.getItem('company_id')}`); 
     } catch (error: any) {
         console.error("Job creation failed:", error.response?.data);
         return error.response?.data;

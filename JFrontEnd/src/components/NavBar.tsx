@@ -14,6 +14,8 @@ const NavBar = () => {
     const success=await logout(token);
     if(success){
       localStorage.removeItem('token');
+      localStorage.removeItem('role');
+      localStorage.removeItem('company_id');
       setToken("");
     }else{
         setError("Logout Fail")
@@ -41,7 +43,7 @@ const NavBar = () => {
             </div>
           )}
         
-     <NavLink to={"/compaines"}><p>Companies</p><p>Post Jobs and Find Talent</p></NavLink>
+     <NavLink to={"/companies"}><p>Companies</p><p>Post Jobs and Find Talent</p></NavLink>
     </div>
 
   </nav>

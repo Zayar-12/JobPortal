@@ -39,7 +39,8 @@ $name=$data['name'];
 
     return response()->json([
         'token'=>$token,
-        'company_id'=>$company->id
+        'company_id'=>$company->id,
+        'role'=>$user->role
     
     ]);
 
