@@ -17,6 +17,8 @@ export interface ContextType{
     setToken:(token:string)=>void,
     search:string,
     setSearch:(value:string)=>void,
+    company_id:string ,
+    setCompanyId:(value:string)=>void,
 }
 
 export interface Auth{

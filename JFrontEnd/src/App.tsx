@@ -24,6 +24,8 @@ import { companyRegisterAction, createJobAction } from './Actions/company'
 
 import UploadJob from './Pages/Company/UploadJob'
 import Dashboard from './Pages/Company/Dashboard'
+import CompanyJob from './Pages/Company/CompanyJob'
+import { loadCompanyJobs } from './Loaders/companyJobs'
 
 
 const App = () => {
@@ -84,7 +86,8 @@ const App = () => {
         children:[
           {
             index:true,
-            element:<CompanyHome/>
+            element:<CompanyHome/>,
+
           },
          {
 
@@ -97,9 +100,9 @@ const App = () => {
           action:companyRegisterAction
          },
          {
-          path:"dashboard/:id",
+          path:"dashboard",
           element:<Dashboard/>,
-          loader:loadCompanyWithJob
+          // loader:loadCompanyWithJob
 
           
          },
@@ -108,7 +111,14 @@ const App = () => {
           element:<UploadJob/>,
           loader:loadAllCategories,
           action:createJobAction
-         }
+         },
+          {
+          path:"companyJobs/:id",
+          element:<CompanyJob/>,
+          loader:loadCompanyJobs
+
+          
+         },
         
         ]
    }

@@ -1,24 +1,93 @@
-import React from 'react'
-import { NavLink, useLoaderData } from 'react-router';
-import type { Company } from '../../types/types';
+import React, { useEffect, useState } from 'react';
+import { NavLink } from 'react-router';
+import { type Company, type Job } from '../../types/types';
+import { useContextHook } from '../../Context/context';
+import { getCompanyWithJob } from '../../utils/company';
 
 const Dashboard = () => {
-     const companyWithJob=useLoaderData() as Company;
-  const jobs=companyWithJob.uploaded_jobs
+  const { token, setToken, company_id, setCompanyId } = useContextHook();
+  const [companyWithJobs, setCompanyWithJobs] = useState<Company | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [message, setMessage] = useState("");
+  const [jobs, setJobs] = useState<Job[] | null>(null);
+
+  useEffect(() => {
+
+    if (!token) {
+        setCompanyWithJobs(null);
+        setJobs(null);
+        return;
+    }
+    const initDashboard = async () => {
+      setLoading(true);
+      
+      const storedId = localStorage.getItem('company_id');
+      const storedToken = localStorage.getItem('token');
+
+      if (!storedId || !storedToken) {
+        setMessage("Authentication failed or No company ID found");
+        setLoading(false);
+        return;
+      }
+
+     
+      setCompanyId(storedId);
+ 
+      setToken(storedToken);
+
+      try {
+      
+        const data = await getCompanyWithJob(storedId);
+        
+        if (data) {
+          setCompanyWithJobs(data);
+          setJobs(data.uploaded_jobs || []);
+        } else {
+          setMessage("Failed to load company data");
+        }
+      } catch (error) {
+        console.error(error);
+        setMessage("An error occurred while fetching data");
+      } finally {
+        
+        setLoading(false);
+      }
+    };
+
+    initDashboard();
+  }, [token]); 
+
+  if (loading) {
+    return <h1>Loading... <p>{message}</p></h1>;
+  }
+
   return (
     <div>
-         <h1>{companyWithJob.name} Dashboard</h1>
-      <div>{
+     
+      {!token && <h2>No Authentication Found</h2>}
 
-        jobs && jobs.map((j)=>(
-           <div key={j.id}>
-            <NavLink to={`/userJobs/${j.id}`}>{j.title}</NavLink>
-           </div>
-        ))
-        }
-      </div>
+      {companyWithJobs ? (
+        <div>
+          <h1>{companyWithJobs.name} Dashboard</h1>
+          <div>
+            {jobs && jobs.length > 0 ? (
+              jobs.map((j) => (
+                <div key={j.id}>
+                  <NavLink to={`/companies/companyJobs/${j.id}`} className="text-blue-500 underline">
+                    {j.title}
+                  </NavLink>
+                </div>
+              ))
+            ) : (
+              <p>No jobs uploaded yet.</p>
+            )}
+          </div>
+        </div>
+      ) : (
+        <h1>{message || "No data available"}</h1>
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;

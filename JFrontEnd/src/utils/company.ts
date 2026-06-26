@@ -32,32 +32,32 @@ export const getAllCompanies= async ():Promise<Company[]>=>{
 
 
 
-export const getCompanyWithJob= async(id:string)=>{
-    
-try {
-    
-const res=await axiosClient.get(`/allCompaines/${id}`,{
-                headers:{ 'Accept': 'application/json',
-                 'Content-Type':'application/json',
-                
-                 
-        }
-        })
+    export const getCompanyWithJob= async(id:string)=>{
+        
+    try {
+        
+    const res=await axiosClient.get(`/allCompaines/${id}`,{
+                    headers:{ 'Accept': 'application/json',
+                    'Content-Type':'application/json',
+                    
+                    
+            }
+            })
 
-        if(!res){
-            console.log("company with job fetch fail")
-            return []
-        }
+            if(!res){
+                console.log("company with job fetch fail")
+                return []
+            }
 
-        console.log(res.data.data)
+            console.log(res.data.data)
 
-        const companyWithJobs=res.data.data
-        return companyWithJobs;
-} catch (err) {
-      console.log(err)
+            const companyWithJobs=res.data.data
+            return companyWithJobs;
+    } catch (err) {
+        console.log(err)
 
-      return []
+        return []
 
-}
-}
+    }
+    }
 

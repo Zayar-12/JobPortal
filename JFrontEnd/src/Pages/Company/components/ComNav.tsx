@@ -3,7 +3,7 @@ import { NavLink } from 'react-router'
 import { useContextHook } from '../../../Context/context'
 import { logout } from '../../../utils/auth';
 const ComNav = () => {
-  const {token,setToken}=useContextHook();
+  const {token,setToken,company_id,setCompanyId}=useContextHook();
 const[error,setError]=useState("");
   
     const handleLogout=async()=>{
@@ -14,6 +14,7 @@ const[error,setError]=useState("");
         localStorage.removeItem('company_id');
 
         setToken("");
+        setCompanyId("");
       }else{
           setError("Logout Fail")
       }

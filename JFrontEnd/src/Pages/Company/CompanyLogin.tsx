@@ -4,6 +4,7 @@ import { login } from '../../utils/auth';
 import { useNavigate } from 'react-router-dom';
 
 import { useContextHook } from '../../Context/context';
+import { axiosClient } from '../../axios/axiosutils';
 
 const Login = () => {
     const[email,setEmail]=useState("");
@@ -30,7 +31,26 @@ try {
 
         const role=localStorage.getItem('role');
         if(role === "employer"){
-          navigate("/companies/dashboard");
+            const employer_id=localStorage.getItem("user_id");
+           try {
+                    const res = await axiosClient.get(`companyId/${employer_id}`, {
+                        headers: {
+                            Authorization: `Bearer ${newToken}`
+                        }
+                    });
+
+                   
+                    localStorage.setItem("company_id", res.data.company_id);
+                    
+                  
+                    localStorage.removeItem("user_id");
+                    localStorage.removeItem("role");
+                    
+                    navigate("/companies/dashboard");
+                } catch (err) {
+                    console.error("Failed to fetch company_id", err);
+                    setError("Could not retrieve company details.");
+                }
         }else{
             navigate("/");
         }

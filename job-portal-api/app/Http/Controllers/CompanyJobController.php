@@ -65,11 +65,12 @@ class CompanyJobController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Job $job, Request $request)
+    public function show(String $id, Request $request)
     {
 
         $user = $request->user();
         $role = $user->role;
+        $job=Job::findOrFail($id);
         if ($role == 'user'  || $role == 'admin') {
             return response()->json([
                 "message" => "You are not an employer"
@@ -95,17 +96,18 @@ class CompanyJobController extends Controller
         }
 
         return new JobResource($job);
+        
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(JobRequest $request, Job $job)
+    public function update(JobRequest $request, String $id)
 
     {
         $data = $request->validated();
 
-
+     $job=Job::findOrFail($id);
         $user = $request->user();
         $role = $user->role;
         if ($role == 'user'  || $role == 'admin') {
@@ -142,11 +144,12 @@ class CompanyJobController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Job $job, Request $request)
+    public function destroy(string $id, Request $request)
     {
 
         $user = $request->user();
         $role = $user->role;
+        $job=Job::findOrFail($id);
         if ($role == 'user'  || $role == 'admin') {
             return response()->json([
                 "message" => "You are not an employer"

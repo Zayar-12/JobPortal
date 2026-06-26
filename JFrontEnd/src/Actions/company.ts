@@ -16,7 +16,7 @@ export const companyRegisterAction = async ({ request }: ActionFunctionArgs) => 
           
         }
 
-        return redirect(`/companies/dashboard/${localStorage.getItem('company_id')}`); 
+        return redirect("/companies/dashboard"); 
     } catch (error: any) {
         return error.response?.data;
     }
@@ -40,9 +40,10 @@ export const createJobAction = async ({ request }: ActionFunctionArgs) => {
         }
              }
         );
-        return redirect(`/companies/dashboard/${localStorage.getItem('company_id')}`); 
+        return redirect("/companies/dashboard"); 
     } catch (error: any) {
         console.error("Job creation failed:", error.response?.data);
         return error.response?.data;
     }
 };
+

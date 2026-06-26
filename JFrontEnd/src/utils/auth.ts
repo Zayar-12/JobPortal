@@ -25,6 +25,7 @@ export const login= async({email,password}:Auth):Promise<boolean>=>{
          const user=res.data.user;
          localStorage.setItem('token',token);
         localStorage.setItem('role',user.role);
+        localStorage.setItem('user_id',user.id);
         
   console.log(user);
          return true;

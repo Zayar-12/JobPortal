@@ -5,7 +5,7 @@ const CompanyHome = () => {
     <div>
 
         <h1>CompanyHome</h1>
-         <NavLink to={"/companyregister"}>Get Started</NavLink>
+         <NavLink to={"/companies/companyregister"}>Get Started</NavLink>
     </div>
 
   )

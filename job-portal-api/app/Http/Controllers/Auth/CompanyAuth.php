@@ -45,4 +45,11 @@ $name=$data['name'];
     ]);
 
 }
+
+public function companyId(String $id){
+    $company=Company::where('employer_id',$id)->first();
+    return response()->json([
+        'company_id'=>$company->id
+    ]);
+}
 }
