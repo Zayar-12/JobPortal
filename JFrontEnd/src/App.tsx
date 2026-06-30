@@ -26,6 +26,8 @@ import UploadJob from './Pages/Company/UploadJob'
 import Dashboard from './Pages/Company/Dashboard'
 import CompanyJob from './Pages/Company/CompanyJob'
 import { loadCompanyJobs } from './Loaders/companyJobs'
+import SearchResults from './Pages/SearchResults'
+import { searchJobsLoader } from './Loaders/searchJobs'
 
 
 const App = () => {
@@ -77,6 +79,11 @@ const App = () => {
         loader:loadSpecificJob,
         action:ApplyJobAction
       },
+      {
+  path: "/search-results",
+  element: <SearchResults />,
+  loader: searchJobsLoader, 
+}
     ]
    },
    {

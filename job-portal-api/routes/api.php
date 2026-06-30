@@ -18,12 +18,12 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('companyJobs', CompanyJobController::class);
-    Route::apiResource('jobApplication',JobApplicationController::class);
-    Route::get('/companyId/{id}',[CompanyAuth::class,'companyId']);
+    Route::apiResource('jobApplication', JobApplicationController::class);
+    Route::get('/companyId/{id}', [CompanyAuth::class, 'companyId']);
 });
 
-Route::apiResource('allCompaines',CompanyController::class);
+Route::apiResource('allCompaines', CompanyController::class);
 Route::apiResource('userJobs', UserJobController::class);
+Route::get('/jobs/search', [UserJobController::class, 'search']);
 Route::apiResource('categories', CategoryController::class);
-Route::post('/register-company',[CompanyAuth::class,'companyRegister']);
-
+Route::post('/register-company', [CompanyAuth::class, 'companyRegister']);

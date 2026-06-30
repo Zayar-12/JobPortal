@@ -38,7 +38,8 @@ export interface Job{
     requirements:string,
     salary:string,
     location:string,
-    deadline:Date
+    deadline:Date,
+    company:Company
 }
 
 export interface Company{

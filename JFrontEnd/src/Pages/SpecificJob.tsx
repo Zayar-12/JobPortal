@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useLoaderData } from 'react-router'
+import { NavLink, useLoaderData } from 'react-router'
 import { Form } from "react-router"
 import { useContextHook } from '../Context/context';
 const SpecificJob = () => {
@@ -12,9 +12,7 @@ const SpecificJob = () => {
     <div>
 
         <h1>
-            {
-                company.name
-            }
+           <NavLink to={`/allcompanies/${company.id}`}>{company.name}</NavLink>
         </h1>
         {specificJob.title}
 

@@ -5,8 +5,8 @@ import { getCompanyWithJob } from "../utils/company";
 export const loadCompanyWithJob= async({params}:LoaderFunctionArgs)=>{
      
     
-    const id=localStorage.getItem('company_id');
-    // localStorage.removeItem('company_id');
+    const id=params.id;
+
     if(!id){
         return redirect("/")
     }

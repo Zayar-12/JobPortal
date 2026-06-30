@@ -1,5 +1,5 @@
 import React from 'react'
-import { useLoaderData } from 'react-router';
+import { Form, useLoaderData } from 'react-router';
 import { NavLink } from 'react-router';
 import type { Category, Job } from '../types/types';
 const Home = () => {
@@ -10,7 +10,13 @@ const Home = () => {
   };
   return (
     <h1>
-      <h1>form here</h1>
+      <h1>
+       <Form action="/search-results" method="get">
+      <input type="text" name="title" placeholder="Job Title" />
+      <input type="text" name="location" placeholder="Location" />
+      <button type="submit">Search</button>
+    </Form>
+      </h1>
       <div className='mt-20'>
         Job categories
         <div className='mt-3'>

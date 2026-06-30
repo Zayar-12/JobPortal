@@ -38,6 +38,26 @@ class UserJobController extends Controller
         return new JobResource($job);
     }
 
+     public function search(Request $request)
+    {
+        $title=$request->query('title');
+        $location=$request->query('location');
+
+        $query=Job::query();
+
+        if($title){
+            $query->where('title', 'like', '%' . $title . '%');
+        }
+
+        if ($location) {
+        $query->where('location', 'like', '%' . $location . '%');
+    }
+
+    $jobs = $query->get();
+
+    return JobResource::collection($jobs);
+    }
+
     /**
      * Update the specified resource in storage.
      */
