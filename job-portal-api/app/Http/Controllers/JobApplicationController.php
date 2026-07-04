@@ -85,9 +85,9 @@ class JobApplicationController extends Controller
         return JobAppllicationResource::collection($jobApplications);
     }
 
-     public function companyJobApplications(String $id){
-        $jobApplications=JobApplication::whereHas('job',function($query) use($id){
-            $query->where('company_id',$id);
+     public function companyJobApplications(String $company_id,String $job_id){
+        $jobApplications=JobApplication::where('job_id',$job_id)->whereHas('job',function($query) use($company_id){
+            $query->where('company_id',$company_id);
         })->with('job','user')->get();
 
         return JobAppllicationResource::collection($jobApplications);
@@ -98,7 +98,24 @@ class JobApplicationController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $application = JobApplication::find($id);
+
+    if (!$application) {
+        return response()->json(['message' => 'Application not found'], 404);
+    }
+
+  
+    $request->validate([
+        'status' => 'required|in:accepted,rejected'
+    ]);
+
+    $application->status = $request->status;
+    $application->save();
+
+    return response()->json([
+        'message' => 'Status updated successfully',
+        'data' => $application
+    ]);
     }
 
     /**

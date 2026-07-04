@@ -20,9 +20,9 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('companyJobs', CompanyJobController::class);
     Route::apiResource('jobApplication', JobApplicationController::class);
-    Route::get('/userJobApplications',[JobApplicationController::class,'userJobApplications']);
-        Route::get('/companyJobApplications/{id}',[JobApplicationController::class,'companyJobApplications']);
-        Route::get("/profile",[UserController::class,'profile']);
+    Route::get('/userJobApplications', [JobApplicationController::class, 'userJobApplications']);
+    Route::get('/companyJobApplications/{companyId}/{jobId}', [JobApplicationController::class, 'companyJobApplications']);
+    Route::get("/profile", [UserController::class, 'profile']);
     Route::get('/companyId/{id}', [CompanyAuth::class, 'companyId']);
 });
 

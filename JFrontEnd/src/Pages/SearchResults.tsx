@@ -14,7 +14,10 @@ import type { Job } from '../types/types';
        {
         jobs && jobs.map(j=>(
           <div>
-             <NavLink to={`/allcompanies/${j.company.id}`}>{j.company.name}</NavLink>
+             <NavLink to={`/allcompanies/${j.company.id}`}>{j.company.name}
+              <img src={j.company.logo} alt={j.company.name} 
+        className="w-20 h-20 object-cover rounded-full" />
+             </NavLink>
                <NavLink to={`/userJobs/${j.id}`}>{j.title}</NavLink>
           </div>
            

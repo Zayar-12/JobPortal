@@ -9,6 +9,8 @@ const SpecificCompany = () => {
   return (
     <div>
       <h1>{companyWithJob.name}</h1>
+      <img src={companyWithJob.logo} alt={companyWithJob.name} 
+        className="w-20 h-20 object-cover rounded-full" />
       <div>{
 
         jobs && jobs.map((j)=>(

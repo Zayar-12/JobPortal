@@ -18,6 +18,10 @@ public function companyRegister(CompanyRegisterRequest $request){
 
  $data= $request->validated();
  
+ if($request->hasFile('logo')){
+    $path=$request->file('logo')->store('company_logos','public');
+    $data['logo']=$path;
+ }
  $email= $data['email'];
  $password=bcrypt($data['password']);
 $name=$data['name'];

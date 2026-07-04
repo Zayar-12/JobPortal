@@ -5,7 +5,7 @@ const CompanyRegister = () => {
   return (
     <div>
       <h1>Sign Up for Free Employer Account</h1>
-    <Form method="post" className='flex flex-col'>
+    <Form method="post" encType="multipart/form-data" className='flex flex-col'>
 
       <input type="email" name='email' placeholder='E-mail' />
 
@@ -17,7 +17,7 @@ const CompanyRegister = () => {
   
   <textarea name="description" placeholder="Company Description" required />
   
-  <input type="text" name="logo" placeholder="Logo URL" />
+<input type="file" name="logo" accept="image/*" />
   
   <input type="text" name="location" placeholder="Location (e.g., Yangon)" />
   

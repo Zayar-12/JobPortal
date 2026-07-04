@@ -41,7 +41,11 @@ const Home = () => {
         {
         latestJobs.map((latestJob)=>(
           <div key={latestJob.id}>
-             <NavLink to={`/userJobs/${latestJob.id}`}>{latestJob.title}</NavLink>
+              
+             <NavLink to={`/userJobs/${latestJob.id}`}>{latestJob.title}--{latestJob.company.name}
+             <img src={latestJob.company.logo} alt={latestJob.company.name} 
+        className="w-20 h-20 object-cover rounded-full" />
+              </NavLink>
           </div>
         ))
        }

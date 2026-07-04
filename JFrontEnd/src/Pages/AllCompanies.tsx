@@ -11,7 +11,9 @@ const AllCompanies = () => {
         {
           allCompanies && allCompanies.map((c)=>(
            <h1 key={c.id}>
-            <NavLink to={`/allcompanies/${c.id}`}>{c.name}</NavLink>
+            <NavLink to={`/allcompanies/${c.id}`}>{c.name}--
+              <img src={c.logo} alt={c.name} 
+        className="w-20 h-20 object-cover rounded-full" /></NavLink>
            </h1>
           ))
         }

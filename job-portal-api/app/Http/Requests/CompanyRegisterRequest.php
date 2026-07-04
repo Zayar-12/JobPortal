@@ -28,7 +28,7 @@ class CompanyRegisterRequest extends FormRequest
             'password' => ['required', 'confirmed', 'min:8'],
             'name' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string'],
-            'logo' => ['nullable', ],
+            'logo' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
             'location' => ['nullable', 'string'],
             'website' => ['nullable', ],
         ];

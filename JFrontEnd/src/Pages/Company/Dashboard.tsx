@@ -68,6 +68,13 @@ const Dashboard = () => {
 
       {companyWithJobs ? (
         <div>
+         {
+          companyWithJobs.logo && 
+          (
+            <img src={companyWithJobs.logo} alt={companyWithJobs.name} 
+        className="w-32 h-32 object-cover rounded-full" />
+          )
+         }
           <h1>{companyWithJobs.name} Dashboard</h1>
           <div>
             {jobs && jobs.length > 0 ? (

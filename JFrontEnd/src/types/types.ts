@@ -39,6 +39,7 @@ export interface Job{
     salary:string,
     location:string,
     deadline:Date,
+    created_at:Date,
     company:Company
 }
 
@@ -65,6 +66,7 @@ export interface JobApplicationDataType{
     status:string,
     job_id:string,
     user_id:string,
+    cv_path:string,
     job:Job,
     applier:profile
 }

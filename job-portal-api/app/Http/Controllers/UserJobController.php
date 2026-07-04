@@ -13,7 +13,7 @@ class UserJobController extends Controller
      */
     public function index()
     {
-        $latest20Jobs=Job::latest()->take(20)->get();
+        $latest20Jobs=Job::with('company')->latest()->take(20)->get();
 
         return JobResource::collection($latest20Jobs);
     }
@@ -34,7 +34,7 @@ class UserJobController extends Controller
     public function show(string $id)
     {
 
-    $job=Job::findOrFail($id);
+    $job=Job::with('company')->findOrFail($id);
         return new JobResource($job);
     }
 
@@ -44,7 +44,8 @@ class UserJobController extends Controller
         $location=$request->query('location');
 
         $query=Job::query();
-
+          
+        $query->with('company');
         if($title){
             $query->where('title', 'like', '%' . $title . '%');
         }

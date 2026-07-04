@@ -7,7 +7,7 @@ const JobApplications = () => {
   return (
     <div>
         {jobapplicationsdata && jobapplicationsdata.map(j=>(
-            <p>{j.status}</p>
+            <p key={j.id}>{j.status}--{j.job.title}--{j.job.created_at.toString()}</p>
         ))}
     </div>
   )

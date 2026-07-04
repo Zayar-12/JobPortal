@@ -4,10 +4,10 @@ import { axiosClient } from "../axios/axiosutils";
 // Actions/company.ts
 export const companyRegisterAction = async ({ request }: ActionFunctionArgs) => {
     const formData = await request.formData();
-    const data = Object.fromEntries(formData);
+    // const data = Object.fromEntries(formData);
 
     try {
-        const res = await axiosClient.post('/register-company', data);
+        const res = await axiosClient.post('/register-company', formData);
 
       
         if (res.data && res.data.token) {

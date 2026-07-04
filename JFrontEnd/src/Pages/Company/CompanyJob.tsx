@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLoaderData, useNavigate, Form } from 'react-router';
 import { axiosClient } from '../../axios/axiosutils';
+import type { Job, JobApplicationDataType,  } from '../../types/types';
 
 const CompanyJob = () => {
   const jobData = useLoaderData() as any;
-  const [job, setJob] = useState(jobData);
+  const [job, setJob] = useState<Job>(jobData);
+  const[jobApplication,setJobApplication]=useState <JobApplicationDataType[]>([]);
+
+  
   const [isEditing, setIsEditing] = useState(false); 
+  const[error,setError]=useState("");
   const navigate = useNavigate();
 
  
@@ -25,6 +30,19 @@ const handleDelete = async () => {
     }
 };
 
+const handleStatusUpdate = async (id: string, status: string) => {
+  const token = localStorage.getItem('token');
+  try {
+    await axiosClient.put(`/jobApplication/${id}`, { status }, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    alert(`Application ${status} successfully`);
+    fetchSepcificJobApplication(); 
+  } catch (error) {
+    console.error(error);
+    alert("Failed to update status");
+  }
+};
 
 const handleUpdate = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -44,6 +62,33 @@ const handleUpdate = async (e: React.FormEvent<HTMLFormElement>) => {
       alert("Failed to update the job");
     }
 };
+
+const fetchSepcificJobApplication= async()=>{
+  const company_id=localStorage.getItem('company_id');
+  const job_id=job.id;
+  const token=localStorage.getItem('token');
+  try {
+    const res=await axiosClient.get(`/companyJobApplications/${company_id}/${job_id}`,{
+      headers:{
+        Authorization: `Bearer ${token}`
+      }
+    });
+
+    if(!res){
+      setError("Res error")
+    }
+ 
+
+    setJobApplication(res.data.data);
+    
+
+  } catch (error) {
+    setError("Fetch Fail")
+  }
+}
+useEffect(()=>{
+  fetchSepcificJobApplication();
+},[])
   return (
     <div className="p-6">
       {isEditing ? (
@@ -78,6 +123,38 @@ const handleUpdate = async (e: React.FormEvent<HTMLFormElement>) => {
             <button onClick={handleDelete} className="bg-red-600 text-white px-4 py-2">Delete Job</button>
           </div>
         </div>
+      )}
+
+
+      {error && <p>{error}</p>}
+
+      {jobApplication && jobApplication.map(j=>{
+      
+        return(
+<div  key={j.id}>
+       
+        <p >{j.status}--{j.applier.name}</p>
+        <a href={j.cv_path} target="_blank" rel="noopener noreferrer">
+      View CV
+    </a>
+    <div className="flex gap-2 mt-2">
+      <button 
+        onClick={() => handleStatusUpdate(j.id, 'accepted')}
+        className="bg-green-500 text-white px-3 py-1 rounded"
+      >
+        Accept
+      </button>
+      <button 
+        onClick={() => handleStatusUpdate(j.id, 'rejected')}
+        className="bg-red-500 text-white px-3 py-1 rounded"
+      >
+        Reject
+      </button>
+    </div>
+       </div>
+        )
+      }
+       
       )}
     </div>
   );

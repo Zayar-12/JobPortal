@@ -16,7 +16,7 @@ class JobAppllicationResource extends JsonResource
     {
         return [
             'id'=>$this->id,
-            'cv_path'=>$this->cv_path,
+            'cv_path'=>$this->cv_path? asset('storage/'.$this->cv_path):null,
             'status'=>$this->status,
             'job_id'=>$this->job_id,
             'user_id'=>$this->user_id,

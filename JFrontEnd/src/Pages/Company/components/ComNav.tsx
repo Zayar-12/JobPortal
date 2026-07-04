@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
-import { NavLink } from 'react-router'
+import { NavLink, redirect, useNavigate } from 'react-router'
 import { useContextHook } from '../../../Context/context'
 import { logout } from '../../../utils/auth';
 const ComNav = () => {
   const {token,setToken,company_id,setCompanyId}=useContextHook();
 const[error,setError]=useState("");
+
+const navigate=useNavigate();
   
     const handleLogout=async()=>{
       const success=await logout(token);
@@ -15,6 +17,7 @@ const[error,setError]=useState("");
 
         setToken("");
         setCompanyId("");
+        navigate("/")
       }else{
           setError("Logout Fail")
       }
@@ -22,7 +25,7 @@ const[error,setError]=useState("");
     }
   return (
     <nav className="flex items-center justify-between px-10 py-5 ">
-     <NavLink to={"/"}>Home</NavLink>
+     <NavLink to={"/companies/dashboard"}>Home</NavLink>
    
     <div className=" flex items-center justify-end gap-10">
        
