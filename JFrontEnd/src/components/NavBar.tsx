@@ -30,12 +30,18 @@ const NavBar = () => {
        <NavLink to={"/allcompanies"}>All compaines</NavLink>
       <NavLink to={"/jobbycategory"}>Jobs by Category</NavLink>
       {token ? (
-            <button 
+           <div>
+             <button 
               onClick={handleLogout}
               className="px-4 py-2 text-sm font-semibold text-white bg-red-500 hover:bg-red-600 rounded-lg shadow-md transition-transform active:scale-95"
             >
               Logout
             </button>
+
+            <NavLink to={"/profile"}>Profile </NavLink>
+           </div>
+
+
           ) : (
             <div>
               <NavLink to={"/login"}>Login </NavLink>

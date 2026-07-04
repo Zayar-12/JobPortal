@@ -28,6 +28,10 @@ import CompanyJob from './Pages/Company/CompanyJob'
 import { loadCompanyJobs } from './Loaders/companyJobs'
 import SearchResults from './Pages/SearchResults'
 import { searchJobsLoader } from './Loaders/searchJobs'
+import Profile from './Pages/Profile/Profile'
+import { jobApplicationsLoader, profileLoader } from './Loaders/profilePage'
+import ProLayout from './Pages/Profile/ProLayout'
+import JobApplications from './Pages/Profile/JobApplications'
 
 
 const App = () => {
@@ -83,7 +87,9 @@ const App = () => {
   path: "/search-results",
   element: <SearchResults />,
   loader: searchJobsLoader, 
-}
+}, 
+
+
     ]
    },
    {
@@ -128,6 +134,23 @@ const App = () => {
          },
         
         ]
+   },{
+    path:"/profile",
+    element:<ProLayout/>,
+    children:[
+       {
+            index:true,
+            element:<Profile/>,
+            loader:profileLoader
+
+          },
+          {
+            path:"jobApplications",
+            element:<JobApplications/>,
+            loader:jobApplicationsLoader
+          }
+    ]
+
    }
 
   ])

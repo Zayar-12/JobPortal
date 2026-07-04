@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CompanyJobController;
 use App\Http\Controllers\JobApplicationController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserJobController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -19,6 +20,9 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('companyJobs', CompanyJobController::class);
     Route::apiResource('jobApplication', JobApplicationController::class);
+    Route::get('/userJobApplications',[JobApplicationController::class,'userJobApplications']);
+        Route::get('/companyJobApplications/{id}',[JobApplicationController::class,'companyJobApplications']);
+        Route::get("/profile",[UserController::class,'profile']);
     Route::get('/companyId/{id}', [CompanyAuth::class, 'companyId']);
 });
 

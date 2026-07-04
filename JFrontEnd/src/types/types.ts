@@ -52,3 +52,19 @@ export interface Company{
     employer_id?:string,
     uploaded_jobs?:Job[]
 }
+
+export interface profile{
+    id:string,
+    name:string,
+    email:string,
+    role:string
+}
+
+export interface JobApplicationDataType{
+    id:string,
+    status:string,
+    job_id:string,
+    user_id:string,
+    job:Job,
+    applier:profile
+}

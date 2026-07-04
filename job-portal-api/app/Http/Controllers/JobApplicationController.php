@@ -76,6 +76,23 @@ class JobApplicationController extends Controller
         return new JobAppllicationResource($jobApplication);
     }
 
+
+    public function userJobApplications(){
+
+    $user=request()->user();
+        $jobApplications=JobApplication::where('user_id',$user->id)->get();
+
+        return JobAppllicationResource::collection($jobApplications);
+    }
+
+     public function companyJobApplications(String $id){
+        $jobApplications=JobApplication::whereHas('job',function($query) use($id){
+            $query->where('company_id',$id);
+        })->with('job','user')->get();
+
+        return JobAppllicationResource::collection($jobApplications);
+    }
+
     /**
      * Update the specified resource in storage.
      */
