@@ -49,6 +49,7 @@ export interface Company{
     description:string,
     location:string,
     logo:string,
+    background_photo:string
     website:string,
     employer_id?:string,
     uploaded_jobs?:Job[]

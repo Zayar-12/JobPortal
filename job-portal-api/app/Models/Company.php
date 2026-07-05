@@ -15,6 +15,7 @@ class Company extends Model
     "logo",
     "location",
     "website",
+    "background_photo"
 
   ];
 

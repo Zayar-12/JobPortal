@@ -43,13 +43,14 @@ const NavBar = () => {
 
 
           ) : (
-            <div>
+            <div className="flex items-center justify-between">
               <NavLink to={"/login"}>Login </NavLink>
      <NavLink to={"/register"}>Register</NavLink>
+      <NavLink to={"/companies"}><p>Companies</p><p>Post Jobs and Find Talent</p></NavLink>
             </div>
           )}
         
-     <NavLink to={"/companies"}><p>Companies</p><p>Post Jobs and Find Talent</p></NavLink>
+    
     </div>
 
   </nav>

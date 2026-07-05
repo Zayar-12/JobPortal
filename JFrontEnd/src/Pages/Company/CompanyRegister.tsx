@@ -17,7 +17,8 @@ const CompanyRegister = () => {
   
   <textarea name="description" placeholder="Company Description" required />
   
-<input type="file" name="logo" accept="image/*" />
+<input type="file" placeholder='logo' name="logo" accept="image/*" />
+<input type="file" placeholder='background_photo' name="background_photo" accept="image/*" />
   
   <input type="text" name="location" placeholder="Location (e.g., Yangon)" />
   

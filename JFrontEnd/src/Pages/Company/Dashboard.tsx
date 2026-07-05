@@ -65,9 +65,18 @@ const Dashboard = () => {
     <div>
      
       {!token && <h2>No Authentication Found</h2>}
+      
 
       {companyWithJobs ? (
         <div>
+
+          {
+            companyWithJobs.background_photo && 
+             (
+            <img src={companyWithJobs.background_photo} alt={companyWithJobs.background_photo} 
+        className="w-32 h-32 object-cover rounded" />
+          )
+          }
          {
           companyWithJobs.logo && 
           (

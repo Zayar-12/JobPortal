@@ -12,9 +12,12 @@ const SpecificJob = () => {
     <div>
 
         <h1>
-           <NavLink to={`/allcompanies/${company.id}`}>{company.name}</NavLink>
+           <NavLink to={`/allcompanies/${company.id}`}>{company.name}
            <img src={company.logo} alt={company.name} 
         className="w-20 h-20 object-cover rounded-full" />
+         <img src={company.background_photo} alt={company.background_photo} 
+        className="w-20 h-20 object-cover rounded" />
+        </NavLink>
         </h1>
         {specificJob.title}
 

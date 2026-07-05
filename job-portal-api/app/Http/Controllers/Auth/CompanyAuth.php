@@ -22,6 +22,10 @@ public function companyRegister(CompanyRegisterRequest $request){
     $path=$request->file('logo')->store('company_logos','public');
     $data['logo']=$path;
  }
+ if($request->hasFile('background_photo')){
+    $path=$request->file('background_photo')->store('company_background_photos','public');
+    $data['background_photo']=$path;
+ }
  $email= $data['email'];
  $password=bcrypt($data['password']);
 $name=$data['name'];

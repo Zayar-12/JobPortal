@@ -20,6 +20,7 @@ class CompanyResource extends JsonResource
     "name"=>$this->name,
     "description"=>$this->description,
     "logo"=>$this->logo? asset('storage/'.$this->logo) :null,
+    "background_photo"=>$this->background_photo? asset('storage/'.$this->background_photo) :null,
     "location"=>$this->location,
     "website"=>$this->website,
     "uploaded_jobs"=>JobResource::collection($this->whenLoaded('jobs'))
