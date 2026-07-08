@@ -85,8 +85,13 @@ class JobApplicationController extends Controller
         return JobAppllicationResource::collection($jobApplications);
     }
 
-     public function companyJobApplications(String $company_id,String $job_id){
-        $jobApplications=JobApplication::where('job_id',$job_id)->whereHas('job',function($query) use($company_id){
+     public function companyJobApplications(String $job_id){
+        $company=request()->user()->company;
+        if (!$company) {
+        return response()->json(['message' => 'Company not found'], 404);
+    }               
+        $company_id=$company->id;
+        $jobApplications=JobApplication::where('job_id',$job_id)->whereHas('job',function($query) use ($company_id) {
             $query->where('company_id',$company_id);
         })->with('job','user')->get();
 

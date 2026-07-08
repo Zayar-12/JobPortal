@@ -6,7 +6,7 @@ const SpecificJob = () => {
 
     const specificJob= useLoaderData();
     const company=specificJob.company;
-   const {setToken,token}=useContextHook();
+   const {setToken,token,user_id}=useContextHook();
     const[path,setPath]=useState("");
   return (
     <div>

@@ -10,9 +10,11 @@ import type { ContextType } from "../types/types";
      const[token,setToken]=useState<string>(localStorage.getItem('token') || "");
      const [search,setSearch]=useState<string>("");
      const [company_id,setCompanyId]=useState<string>("");
+        const [user_id,setUserId]=useState<string>("");
+           const [role,setRole]=useState<string>("");
 
 return (
-    <context.Provider value={{ token, setToken,search ,setSearch,company_id,setCompanyId }}>
+    <context.Provider value={{ token, setToken,search ,setSearch,company_id,setCompanyId ,user_id,setUserId,setRole,role}}>
      {children}
     </context.Provider>
 )

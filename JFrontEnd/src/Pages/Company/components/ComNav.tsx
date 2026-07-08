@@ -14,6 +14,7 @@ const navigate=useNavigate();
         localStorage.removeItem('token');
         localStorage.removeItem('role');
         localStorage.removeItem('company_id');
+        localStorage.removeItem('user_id');
 
         setToken("");
         setCompanyId("");

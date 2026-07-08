@@ -10,7 +10,7 @@ const Login = () => {
     const [password,setPassword]=useState("");
     const [error,setError]=useState("");
     const [loading,setLoading]=useState(false);
-    const {setToken,token}=useContextHook();
+    const {setToken,token,user_id,setUserId,setRole,role}=useContextHook();
 
     const navigate=useNavigate();
 
@@ -25,8 +25,11 @@ try {
     });
 
     if(success){
-        const newToken=localStorage.getItem('token');
-        setToken(newToken || "");
+       setToken(localStorage.getItem('token') || "");
+    // setUserId(localStorage.getItem('user_id') || "");
+    setRole(localStorage.getItem('role') || "");
+    // localStorage.removeItem('user_id');
+    localStorage.removeItem('role');
      navigate("/");
     }else{
        setError('Invalid credentials');

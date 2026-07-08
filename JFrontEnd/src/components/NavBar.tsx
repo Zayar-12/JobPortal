@@ -13,9 +13,7 @@ const NavBar = () => {
   const handleLogout=async()=>{
     const success=await logout(token);
     if(success){
-      localStorage.removeItem('token');
-      localStorage.removeItem('role');
-      localStorage.removeItem('company_id');
+     localStorage.clear();
       setToken("");
     }else{
         setError("Logout Fail")

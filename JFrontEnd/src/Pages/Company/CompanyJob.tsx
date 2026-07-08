@@ -68,7 +68,7 @@ const fetchSepcificJobApplication= async()=>{
   const job_id=job.id;
   const token=localStorage.getItem('token');
   try {
-    const res=await axiosClient.get(`/companyJobApplications/${company_id}/${job_id}`,{
+    const res=await axiosClient.get(`/companyJobApplications/${job_id}`,{
       headers:{
         Authorization: `Bearer ${token}`
       }

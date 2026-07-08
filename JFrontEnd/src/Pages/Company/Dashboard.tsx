@@ -20,24 +20,25 @@ const Dashboard = () => {
     }
     const initDashboard = async () => {
       setLoading(true);
-      
-      const storedId = localStorage.getItem('company_id');
+     
+      // const storedId = localStorage.getItem('company_id');
       const storedToken = localStorage.getItem('token');
 
-      if (!storedId || !storedToken) {
+      if (!company_id || !storedToken) {
         setMessage("Authentication failed or No company ID found");
         setLoading(false);
         return;
       }
 
      
-      setCompanyId(storedId);
+      setCompanyId(company_id);
  
       setToken(storedToken);
 
       try {
+
       
-        const data = await getCompanyWithJob(storedId);
+        const data = await getCompanyWithJob(company_id);
         
         if (data) {
           setCompanyWithJobs(data);

@@ -11,7 +11,7 @@ const Login = () => {
     const [password,setPassword]=useState("");
     const [error,setError]=useState("");
     const [loading,setLoading]=useState(false);
-    const {setToken,token}=useContextHook();
+    const {setToken,token,company_id,setCompanyId,setRole,role,setUserId,user_id}=useContextHook();
 
     const navigate=useNavigate();
 
@@ -26,25 +26,27 @@ try {
     });
 
     if(success){
-        const newToken=localStorage.getItem('token');
-        setToken(newToken || "");
+       const token = localStorage.getItem('token');
+            const role = localStorage.getItem('role');
 
-        const role=localStorage.getItem('role');
+          
+            if (token) setToken(token);
+            if (role) setRole(role);
+       localStorage.removeItem('role');
         if(role === "employer"){
-            const employer_id=localStorage.getItem("user_id");
+            // const employer_id=localStorage.getItem("user_id");
            try {
-                    const res = await axiosClient.get(`companyId/${employer_id}`, {
+                    const res = await axiosClient.get("/companyId", {
                         headers: {
-                            Authorization: `Bearer ${newToken}`
+                            Authorization: `Bearer ${token}`
                         }
                     });
 
                    
-                    localStorage.setItem("company_id", res.data.company_id);
+                    // localStorage.setItem("company_id", res.data.company_id);
                     
-                  
-                    localStorage.removeItem("user_id");
-                    localStorage.removeItem("role");
+                     setCompanyId(res.data.company_id);
+                   
                     
                     navigate("/companies/dashboard");
                 } catch (err) {
