@@ -19,6 +19,10 @@ export interface ContextType{
     setSearch:(value:string)=>void,
     company_id:string ,
     setCompanyId:(value:string)=>void,
+    user_id:string,
+    setUserId:(value:string)=>void,
+    role:string,
+    setRole:(value:string)=>void,
 }
 
 export interface Auth{

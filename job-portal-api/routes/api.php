@@ -22,8 +22,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('jobApplication', JobApplicationController::class);
     Route::get('/userJobApplications', [JobApplicationController::class, 'userJobApplications']);
     Route::get('/companyJobApplications/{jobId}', [JobApplicationController::class, 'companyJobApplications']);
+     Route::get('/existingJobApplication/{id}', [JobApplicationController::class, 'existingJobApplication']);
     Route::get("/profile", [UserController::class, 'profile']);
     Route::get('/companyId', [CompanyAuth::class, 'companyId']);
+    
 });
 
 Route::apiResource('allCompaines', CompanyController::class);

@@ -67,7 +67,31 @@ class JobApplicationController extends Controller
             "data" => $newJobApplication
         ], 201);
     }
+ 
+      public function existingJobApplication(String $id){
+         $user = request()->user();
+        if ($user->role != 'user') {
+            return response()->json([
+                "message" => "Your role is not user"
+            ]);
+        }
+        $job=Job::findOrFail($id);
+        if($job){
+             return response()->json([
+                "message" => "No job exist"
+            ]);
+        }
+        $job_id = $job->id;
+       
+        $user_id = $user->id;
+        $existingJobApplicatoin = JobApplication::where('user_id', $user_id)->where('job_id', $job_id)->exists();
 
+
+      return response()->json([
+        "hasApplied" => $existingJobApplicatoin
+    ]);
+        
+      }
     /**
      * Display the specified resource.
      */
