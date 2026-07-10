@@ -13,7 +13,7 @@ class UserJobController extends Controller
      */
     public function index()
     {
-        $latest20Jobs=Job::with('company')->latest()->take(20)->get();
+        $latest20Jobs=Job::with('company')->latest()->paginate(3);
 
         return JobResource::collection($latest20Jobs);
     }
@@ -54,7 +54,7 @@ class UserJobController extends Controller
         $query->where('location', 'like', '%' . $location . '%');
     }
 
-    $jobs = $query->get();
+    $jobs = $query->paginate(3);
 
     return JobResource::collection($jobs);
     }

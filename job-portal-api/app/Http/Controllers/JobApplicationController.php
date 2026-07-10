@@ -76,7 +76,7 @@ class JobApplicationController extends Controller
             ]);
         }
         $job=Job::findOrFail($id);
-        if($job){
+        if(!$job){
              return response()->json([
                 "message" => "No job exist"
             ]);

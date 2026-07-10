@@ -20,27 +20,28 @@ export const loadAllCategories= async ({params}:LoaderFunctionArgs)=>{
 
 
 
-export const loadLatestJobs= async ({params}:LoaderFunctionArgs)=>{
+// export const loadLatestJobs= async ({params}:LoaderFunctionArgs)=>{
 
-    const latestJobs= await getLatestJobs();
+//     const latestJobs= await getLatestJobs();
 
-    if(!latestJobs){
-        console.log("No latest jobs")
-    }
+//     if(!latestJobs){
+//         console.log("No latest jobs")
+//     }
 
 
-    console.log(latestJobs);
-    return latestJobs;
+//     console.log(latestJobs);
+//     return latestJobs;
     
-}
+// }
 
 
-export const loadHomepageData = async ({ params }: LoaderFunctionArgs) => {
-  
-  const [allCategories, latestJobs] = await Promise.all([
+export const loadHomepageData = async ({ request }: LoaderFunctionArgs) => {
+  const url=new URL(request.url);
+  const page=url.searchParams.get("page") || "1";
+  const [allCategories, jobsResponse] = await Promise.all([
     getAllCategories(),
-    getLatestJobs()
+    getLatestJobs(page)
   ]);
 
-  return { allCategories, latestJobs };
+  return { allCategories, jobsResponse };
 };

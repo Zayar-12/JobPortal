@@ -1,32 +1,42 @@
 import { axiosClient } from "../axios/axiosutils"
 
-export const getLatestJobs= async()=>{
+// export const getLatestJobs= async(page:string)=>{
 
     
-    try {
+//     try {
         
-    const res=await axiosClient.get('/userJobs',{
-                    headers:{ 'Accept': 'application/json',
-                     'Content-Type':'application/json',
+//     const res=await axiosClient.get(`/userJobs?page=${page}`,{
+//                     headers:{ 'Accept': 'application/json',
+//                      'Content-Type':'application/json',
                     
                      
-            }
-            })
+//             }
+//             })
     
-            if(!res){
-                console.log("Latest Jobs fetch fail")
-                return []
-            }
+//             if(!res){
+//                 console.log("Latest Jobs fetch fail")
+//                 return []
+//             }
     
-            console.log(res.data.data)
+//             console.log(res.data.data)
     
-            const LatestJobs=res.data.data
-            return LatestJobs;
+//             const LatestJobs=res.data.data
+//             return LatestJobs;
+//     } catch (err) {
+//           console.log(err)
+    
+//           return []
+    
+//     }
+// }
+
+export const getLatestJobs = async (page: string) => {
+    try {
+        const res = await axiosClient.get(`/userJobs?page=${page}`);
+        return res.data; 
     } catch (err) {
-          console.log(err)
-    
-          return []
-    
+        console.error(err);
+        return { data: [], links: [], meta: {} };
     }
 }
 
