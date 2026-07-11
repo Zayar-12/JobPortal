@@ -107,6 +107,7 @@ const NavBar = () => {
         ) : (
           <div className="flex items-center gap-4">
             <NavLink to={"/login"} className="text-gray-600 hover:text-blue-600 font-medium">Sign In</NavLink>
+            <NavLink to={"/companies"} className="text-gray-600 hover:text-blue-600 font-medium">For Employer</NavLink>
             <NavLink to={"/register"} className="px-5 py-2 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-full transition-all shadow-sm">
               Register
             </NavLink>
