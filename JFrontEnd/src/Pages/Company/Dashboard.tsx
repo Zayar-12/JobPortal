@@ -169,7 +169,9 @@ const Dashboard = () => {
       {/* Content */}
       <div className="mt-24 px-10">
         <h1 className="text-2xl font-bold mb-6">{companyWithJobs?.name} Dashboard</h1>
-        
+         <h1 className="text-2xl font-bold mb-6">{companyWithJobs?.description} Dashboard</h1>
+          <h1 className="text-2xl font-bold mb-6">{companyWithJobs?.location} Dashboard</h1>
+           <h1 className="text-2xl font-bold mb-6">{companyWithJobs?.website} Dashboard</h1>
         <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
           <h2 className="font-semibold text-gray-700 mb-4">Your Active Job Postings</h2>
           {jobs && jobs.length > 0 ? (
