@@ -135,7 +135,7 @@ const Login = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   
-  const { setToken, setRole } = useContextHook();
+  const { setToken, setRole ,role} = useContextHook();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -147,10 +147,25 @@ const Login = () => {
       const success = await login({ email, password });
 
       if (success) {
-        setToken(localStorage.getItem('token') || "");
-        setRole(localStorage.getItem('role') || "");
-        localStorage.removeItem('role');
-        navigate("/");
+        // setToken(localStorage.getItem('token') || "");
+        // setRole(localStorage.getItem('role') || "");
+        // localStorage.removeItem('role');
+        // if(role === 'admin'){
+        //   navigate("/admin")
+        // }
+        // navigate("/");
+        const tokenVal = localStorage.getItem('token') || "";
+        const roleVal = localStorage.getItem('role') || "";
+
+        setToken(tokenVal);
+        setRole(roleVal);
+        
+        
+        if (roleVal === 'admin') {
+          navigate("/admin");
+        } else {
+          navigate("/");
+        }
       } else {
         setError('Invalid email or password. Please try again.');
       }

@@ -32,6 +32,11 @@ import Profile from './Pages/Profile/Profile'
 import { jobApplicationsLoader, profileLoader } from './Loaders/profilePage'
 import ProLayout from './Pages/Profile/ProLayout'
 import JobApplications from './Pages/Profile/JobApplications'
+import AdminHomeAdminDashboard from './Pages/Admin/AdminDashboard'
+import AdminHome from './Pages/Admin/AdminHome'
+import AdminManage from './Pages/Admin/AdminManage'
+import AdminSpecificCompany from './Pages/Admin/AdminSpecificCompany'
+import AdminSpecificJob from './Pages/Admin/AdminSpecificJob'
 
 
 const App = () => {
@@ -151,6 +156,19 @@ const App = () => {
           }
     ]
 
+   },{
+    path:"/admin",
+    element:<AdminHomeAdminDashboard/>,
+    children:[
+      {
+        index:true,
+        element:<AdminHome/>
+      },
+      { path: "manage", element: <AdminManage /> },
+     { path: "adminspecificCompany/:id", element: <AdminSpecificCompany /> , loader:loadCompanyWithJob},
+    { path: "adminspecificJob/:id", element: <AdminSpecificJob />, loader:loadSpecificJob, },
+
+    ]
    }
 
   ])

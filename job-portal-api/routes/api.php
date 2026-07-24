@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\CompanyAuth;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CompanyController;
@@ -24,6 +25,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/companyJobApplications/{jobId}', [JobApplicationController::class, 'companyJobApplications']);
      Route::get('/existingJobApplication/{id}', [JobApplicationController::class, 'existingJobApplication']);
     Route::get("/profile", [UserController::class, 'profile']);
+    Route::get("/admin/allCompanies",[AdminController::class,'allCompanies']);
+     Route::get("/admin/allUsers",[AdminController::class,'allUsers']);
+      Route::get("/admin/allRecentJobs",[AdminController::class,'allRecentJobs']);
     Route::get('/companyId', [CompanyAuth::class, 'companyId']);
     
 });
