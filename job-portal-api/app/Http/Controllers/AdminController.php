@@ -33,4 +33,79 @@ class AdminController extends Controller
         $allRecentJobs=Job::latest()->get();
         return JobResource::collection($allRecentJobs);
     }
+ 
+   public function pendingCompanies()
+    {
+        $companies = Company::where('status', 'pending')->get();
+        return CompanyResource::collection($companies);
+    }
+
+    public function pendingJobs()
+    {
+        
+        $jobs = Job::where('status', 'pending')->with('company')->get();
+        return JobResource::collection($jobs);
+    }
+
+    public function acceptActionCompanies(string $id)
+    {
+        $company = Company::find($id);
+
+        if (!$company) {
+            return response()->json(['message' => 'Company not found'], 404);
+        }
+
+        $company->status = 'accepted';
+        $company->save();
+
+        return response()->json([
+            'message' => 'Company approved successfully',
+            'data' => new CompanyResource($company)
+        ]);
+    }
+
+    public function acceptActionJobs(string $id)
+    {
+        $job = Job::find($id);
+
+        if (!$job) {
+            return response()->json(['message' => 'Job not found'], 404);
+        }
+
+        $job->status = 'accepted';
+        $job->save();
+
+        return response()->json([
+            'message' => 'Job approved successfully',
+            'data' => new JobResource($job)
+        ]);
+    }
+
+    public function rejectActionCompanies(string $id)
+    {
+        $company = Company::find($id);
+
+        if (!$company) {
+            return response()->json(['message' => 'Company not found'], 404);
+        }
+
+        
+        $company->delete(); 
+
+        return response()->json(['message' => 'Company rejected and deleted successfully']);
+    }
+
+    public function rejectActionJobs(string $id)
+    {
+        $job = Job::find($id);
+
+        if (!$job) {
+            return response()->json(['message' => 'Job not found'], 404);
+        }
+
+        $job->delete();
+
+        return response()->json(['message' => 'Job rejected and deleted successfully']);
+    }
+    
 }

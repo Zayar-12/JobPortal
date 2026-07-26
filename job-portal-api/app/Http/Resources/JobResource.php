@@ -25,6 +25,7 @@ class JobResource extends JsonResource
     'location'=>$this->location,
     'deadline'=>$this->deadline,
     'created_at'=>$this->created_at,
+    'status'=>$this->status,
     'company'=>new CompanyResource($this->company)
         ];
     }

@@ -44,7 +44,8 @@ export interface Job{
     location:string,
     deadline:Date,
     created_at:Date,
-    company:Company
+    company:Company,
+    status:string,
 }
 
 export interface Company{
@@ -56,7 +57,8 @@ export interface Company{
     background_photo:string
     website:string,
     employer_id?:string,
-    uploaded_jobs?:Job[]
+    uploaded_jobs?:Job[],
+    status:string,
 }
 
 export interface profile{

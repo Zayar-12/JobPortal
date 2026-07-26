@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('background_photo')->nullable();
             $table->string('location')->nullable();
             $table->string('website')->nullable();
+             $table->enum('status', ['pending', 'accepted', 'rejected'])->default('pending');
             $table->timestamps();
         });
     }

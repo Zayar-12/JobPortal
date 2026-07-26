@@ -15,7 +15,7 @@ class CompanyController extends Controller
      */
     public function index()
     {
-       $allCompanies= Company::all();
+       $allCompanies= Company::where('status','accepted')->get();
 
        return CompanyResource::collection($allCompanies);
     }

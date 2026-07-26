@@ -4,9 +4,14 @@ import AdminNav from './AdminNav';
 
 const AdminDashboard = () => {
   return (
-    <div className="min-h-screen bg-gray-50/50 pb-16">
+    <div className="min-h-screen bg-gray-50/50 flex">
+      
       <AdminNav />
-      <Outlet />
+
+   
+      <main className="flex-1 ml-64 min-h-screen pb-16">
+        <Outlet />
+      </main>
     </div>
   );
 };

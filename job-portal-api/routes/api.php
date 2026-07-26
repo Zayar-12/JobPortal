@@ -28,7 +28,14 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get("/admin/allCompanies",[AdminController::class,'allCompanies']);
      Route::get("/admin/allUsers",[AdminController::class,'allUsers']);
       Route::get("/admin/allRecentJobs",[AdminController::class,'allRecentJobs']);
+      Route::get("/admin/pending-companies",[AdminController::class,'pendingCompanies']);
+      Route::get("/admin/pending-jobs",[AdminController::class,'pendingJobs']);
+     
     Route::get('/companyId', [CompanyAuth::class, 'companyId']);
+     Route::patch("/admin/jobs/{id}/approve",[AdminController::class,'acceptActionJobs']);
+     Route::patch("/admin/companies/{id}/approve",[AdminController::class,'acceptActionCompanies']);
+     Route::delete("/admin/companies/{id}/reject", [AdminController::class, 'rejectActionCompanies']);
+    Route::delete("/admin/jobs/{id}/reject", [AdminController::class, 'rejectActionJobs']);
     
 });
 

@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useContextHook } from '../../Context/context';
 import { axiosClient } from '../../axios/axiosutils';
-import { FolderPlus, Image as ImageIcon, Plus } from 'lucide-react';
+import { FolderPlus, Image as ImageIcon, Plus, Trash2 } from 'lucide-react';
 
 const AdminManage = () => {
   const { token } = useContextHook();
   const [categories, setCategories] = useState([]);
   const [newCategoryName, setNewCategoryName] = useState('');
+  const [categoryLogo, setCategoryLogo] = useState<File | null>(null);
   const [bgFiles, setBgFiles] = useState<FileList | null>(null);
 
   useEffect(() => {
@@ -28,16 +29,48 @@ const AdminManage = () => {
     e.preventDefault();
     if (!newCategoryName.trim()) return;
 
+    const formData = new FormData();
+    formData.append('name', newCategoryName);
+    if (categoryLogo) {
+      formData.append('logo', categoryLogo);
+    }
+
     try {
-      await axiosClient.post('/categories', { name: newCategoryName }, {
-        headers: { Authorization: `Bearer ${token}` }
+      await axiosClient.post('/categories', formData, {
+        headers: { 
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data'
+        }
       });
       setNewCategoryName('');
+      setCategoryLogo(null);
       alert("Category added successfully!");
       fetchCategories();
-    } catch (error) {
-      console.error(error);
-      alert("Failed to add category.");
+    } catch (error: any) {
+      console.error("Full error response:", error.response);
+      const errors = error.response?.data?.errors;
+      if (errors) {
+        const errorText = Object.values(errors).flat().join('\n');
+        alert(errorText);
+      } else {
+        alert(error.response?.data?.message || "Failed to add category.");
+      }
+    }
+  };
+
+  // 👈 Category ဖျက်ရန် Function အသစ်
+  const handleDeleteCategory = async (id: number | string) => {
+    if (!window.confirm("Are you sure you want to delete this category?")) return;
+
+    try {
+      await axiosClient.delete(`/categories/${id}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      alert("Category deleted successfully!");
+      fetchCategories();
+    } catch (error: any) {
+      console.error("Failed to delete category", error);
+      alert(error.response?.data?.message || "Failed to delete category.");
     }
   };
 
@@ -87,10 +120,21 @@ const AdminManage = () => {
                 value={newCategoryName} 
                 onChange={(e) => setNewCategoryName(e.target.value)} 
                 placeholder="e.g. Design, Finance, Engineering" 
-                className="w-full p-3 border rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition"
+                className="w-full p-3 border rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition text-sm"
                 required 
               />
             </div>
+
+            <div>
+              <label className="block text-xs font-semibold text-gray-500 uppercase mb-1">Category Logo / Icon</label>
+              <input 
+                type="file" 
+                accept="image/*"
+                onChange={(e) => setCategoryLogo(e.target.files ? e.target.files[0] : null)} 
+                className="w-full p-2.5 border rounded-xl file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 cursor-pointer text-sm text-gray-500"
+              />
+            </div>
+
             <button type="submit" className="bg-blue-600 text-white px-5 py-2.5 rounded-xl font-semibold hover:bg-blue-700 flex items-center gap-2 transition cursor-pointer">
               <Plus size={16} /> Add Category
             </button>
@@ -100,9 +144,20 @@ const AdminManage = () => {
             <h3 className="text-xs font-semibold text-gray-400 uppercase mb-3">Existing Categories</h3>
             <div className="flex flex-wrap gap-2 max-h-48 overflow-y-auto">
               {categories.map((cat: any) => (
-                <span key={cat.id} className="bg-gray-100 text-gray-700 text-xs font-medium px-3.5 py-2 rounded-xl border border-gray-200">
-                  {cat.name}
-                </span>
+                <div key={cat.id} className="bg-gray-50 text-gray-700 text-xs font-medium px-3.5 py-2 rounded-xl border border-gray-200 flex items-center gap-3">
+                  <div className="flex items-center gap-2">
+                    {cat.icon && <img src={cat.icon} alt="" className="w-4 h-4 object-contain rounded-full" />}
+                    <span>{cat.name}</span>
+                  </div>
+                  {/* Delete Button */}
+                  <button 
+                    onClick={() => handleDeleteCategory(cat.id)}
+                    className="text-gray-400 hover:text-red-600 transition cursor-pointer"
+                    title="Delete Category"
+                  >
+                    <Trash2 size={14} />
+                  </button>
+                </div>
               ))}
             </div>
           </div>

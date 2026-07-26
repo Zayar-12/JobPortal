@@ -21,6 +21,7 @@ return new class extends Migration
             $table->float('salary');
             $table->string('location')->nullable();
             $table->date('deadline');
+             $table->enum('status', ['pending', 'accepted', 'rejected'])->default('pending');
             $table->timestamps();
         });
 

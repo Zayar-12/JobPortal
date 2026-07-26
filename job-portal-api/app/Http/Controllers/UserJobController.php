@@ -13,7 +13,7 @@ class UserJobController extends Controller
      */
     public function index()
     {
-        $latest20Jobs=Job::with('company')->latest()->paginate(3);
+        $latest20Jobs=Job::with('company')->where('status','accepted')->latest()->paginate(3);
 
         return JobResource::collection($latest20Jobs);
     }
@@ -47,11 +47,11 @@ class UserJobController extends Controller
           
         $query->with('company');
         if($title){
-            $query->where('title', 'like', '%' . $title . '%');
+            $query->where('title', 'like', '%' . $title . '%')->where('status','accepted');
         }
 
         if ($location) {
-        $query->where('location', 'like', '%' . $location . '%');
+        $query->where('location', 'like', '%' . $location . '%')->where('status','accepted');
     }
 
     $jobs = $query->paginate(3);
