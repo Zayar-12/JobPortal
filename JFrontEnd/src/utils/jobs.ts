@@ -29,7 +29,20 @@ import { axiosClient } from "../axios/axiosutils"
     
 //     }
 // }
-
+export const getTopCompanies = async () => {
+    try {
+        const res = await axiosClient.get('/topCompanies', {
+            headers: { 
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            }
+        });
+        return res.data.data || [];
+    } catch (err) {
+        console.error("Top companies fetch fail", err);
+        return [];
+    }
+};
 export const getLatestJobs = async (page: string) => {
     try {
         const res = await axiosClient.get(`/userJobs?page=${page}`);

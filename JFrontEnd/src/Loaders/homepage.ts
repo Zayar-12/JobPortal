@@ -1,7 +1,7 @@
 
 import { redirect, type LoaderFunctionArgs } from "react-router";
 import { getAllCategories } from "../utils/categories";
-import { getLatestJobs } from "../utils/jobs";
+import { getLatestJobs, getTopCompanies } from "../utils/jobs";
 
 
 export const loadAllCategories= async ({params}:LoaderFunctionArgs)=>{
@@ -38,10 +38,11 @@ export const loadAllCategories= async ({params}:LoaderFunctionArgs)=>{
 export const loadHomepageData = async ({ request }: LoaderFunctionArgs) => {
   const url=new URL(request.url);
   const page=url.searchParams.get("page") || "1";
-  const [allCategories, jobsResponse] = await Promise.all([
+  const [allCategories, jobsResponse,topCompanies] = await Promise.all([
     getAllCategories(),
-    getLatestJobs(page)
+    getLatestJobs(page),
+    getTopCompanies()
   ]);
 
-  return { allCategories, jobsResponse };
+  return { allCategories, jobsResponse,topCompanies };
 };

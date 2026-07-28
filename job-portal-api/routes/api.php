@@ -40,6 +40,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 });
 
 Route::apiResource('allCompaines', CompanyController::class);
+Route::get('topCompanies',[UserJobController::class,'topCompanies']);
 Route::apiResource('userJobs', UserJobController::class);
 Route::get('/jobs/search', [UserJobController::class, 'search']);
 Route::apiResource('categories', CategoryController::class);
