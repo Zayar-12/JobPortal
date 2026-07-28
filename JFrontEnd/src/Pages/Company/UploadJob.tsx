@@ -1,116 +1,187 @@
-// import React from 'react';
-// import { Form, useLoaderData } from 'react-router';
-// import type { Category } from '../../types/types';
-
-// const UploadJob = () => {
-//   const allcategories = useLoaderData() as Category[];
-
-//   return (
-//     <div>
-//       <h1>Upload the Job</h1>
-
-//       <Form method="post" className="flex flex-col gap-4 max-w-md">
-//         <input type="text" name="title" placeholder="Job Title" required className="border p-2" />
-        
-//         <textarea name="description" placeholder="Job Description" required className="border p-2" />
-        
-//         <input type="number" name="salary" placeholder="Salary" required className="border p-2" />
-
-//         <input type="text" name="location" placeholder="Location" required className="border p-2" />
-//           <textarea 
-//   name="requirements" 
-//   placeholder="Job Requirements" 
-//   required 
-//   className="border p-2" 
-// />
-       
-//         <select name="category_id" required className="border p-2">
-//           <option value="">Select a Category</option>
-//           {allcategories.map((category) => (
-//             <option key={category.id} value={category.id}>
-//               {category.name}
-//             </option>
-//           ))}
-//         </select>
-
-
-//     <input type="date" name="deadline" required  />
-//         <button type="submit" className="bg-blue-500 text-white p-2 rounded">
-//           Post Job
-//         </button>
-//       </Form>
-//     </div>
-//   );
-// };
-
-// export default UploadJob;
-
-
 import React from 'react';
 import { Form, useLoaderData } from 'react-router';
 import type { Category } from '../../types/types';
+import { 
+  Briefcase, 
+  DollarSign, 
+  MapPin, 
+  Layers, 
+  FileText, 
+  CheckCircle2, 
+  Calendar, 
+  Send 
+} from 'lucide-react';
+import uploadImg from '../../assets/upload img.png';
 
 const UploadJob = () => {
   const allcategories = useLoaderData() as Category[];
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4">
-      <div className="max-w-3xl mx-auto bg-white p-10 rounded-2xl shadow-sm border border-gray-200">
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      {/* Main Container Card Split into Left & Right */}
+      <div className="max-w-7xl w-full bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden grid grid-cols-1 lg:grid-cols-12">
         
-        {/* Header */}
-        <div className="mb-10">
-          <h1 className="text-2xl font-bold text-gray-900">Post a New Job</h1>
-          <p className="text-sm text-gray-500 mt-2">Fill in the details below to publish your opening to our platform.</p>
+        {/* Left Side: Illustration / Image Panel */}
+        <div className="lg:col-span-5 relative bg-blue-950 p-10 flex flex-col justify-between overflow-hidden">
+          {/* Background Illustration Image */}
+          <div className="absolute inset-0 z-0">
+            <img 
+              src={uploadImg} 
+              alt="Upload Illustration" 
+              className="w-full h-full object-cover object-center opacity-60 scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-blue-950 via-blue-950/60 to-transparent" />
+          </div>
+
+          {/* Content Overlay */}
+          <div className="relative z-10 space-y-4">
+            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md text-white px-3.5 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider border border-white/20">
+              <Briefcase size={14} /> Employer Portal
+            </div>
+            <h2 className="text-3xl font-extrabold text-white tracking-tight leading-snug">
+              Find the Right Talent for Your Team
+            </h2>
+            <p className="text-blue-100/80 text-sm leading-relaxed">
+              Publish your job openings to reach qualified professionals and streamline your hiring process from one central dashboard.
+            </p>
+          </div>
+
+          <div className="relative z-10 pt-12">
+            <div className="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/15 text-white space-y-2">
+              <p className="text-xs font-bold uppercase tracking-wider text-blue-200">Did you know?</p>
+              <p className="text-xs text-blue-100 leading-relaxed">
+                Detailed descriptions and clear requirements attract up to 3x more relevant candidate applications.
+              </p>
+            </div>
+          </div>
         </div>
 
-        {/* Form */}
-        <Form method="post" className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="space-y-2">
-              <label className="block text-sm font-medium text-gray-700">Job Title</label>
-              <input type="text" name="title" required placeholder="e.g. Senior Software Engineer" className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 outline-none transition" />
+        {/* Right Side: Job Form Panel */}
+        <div className="lg:col-span-7 p-8 sm:p-12 bg-white flex flex-col justify-center">
+          
+          {/* Header */}
+          <div className="mb-8 border-b border-gray-100 pb-5">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight">Post a New Job Opening</h1>
+            <p className="text-xs sm:text-sm text-gray-500 mt-1">Fill in the specification details below to publish your opening.</p>
+          </div>
+
+          {/* Form */}
+          <Form method="post" className="space-y-5">
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              {/* Job Title */}
+              <div className="space-y-1.5">
+                <label className="block text-xs font-semibold text-gray-600 uppercase tracking-wide flex items-center gap-1.5">
+                  <Briefcase size={14} className="text-blue-600" /> Job Title
+                </label>
+                <input 
+                  type="text" 
+                  name="title" 
+                  required 
+                  placeholder="e.g. Senior Software Engineer" 
+                  className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:bg-white focus:ring-2 focus:ring-blue-600 outline-none transition text-sm font-medium text-gray-800" 
+                />
+              </div>
+
+              {/* Salary */}
+              <div className="space-y-1.5">
+                <label className="block text-xs font-semibold text-gray-600 uppercase tracking-wide flex items-center gap-1.5">
+                  <DollarSign size={14} className="text-blue-600" /> Salary (Monthly)
+                </label>
+                <input 
+                  type="number" 
+                  name="salary" 
+                  required 
+                  placeholder="e.g. 5000" 
+                  className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:bg-white focus:ring-2 focus:ring-blue-600 outline-none transition text-sm font-medium text-gray-800" 
+                />
+              </div>
             </div>
-            <div className="space-y-2">
-              <label className="block text-sm font-medium text-gray-700">Salary (Monthly)</label>
-              <input type="number" name="salary" required placeholder="e.g. 5000" className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 outline-none transition" />
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              {/* Location */}
+              <div className="space-y-1.5">
+                <label className="block text-xs font-semibold text-gray-600 uppercase tracking-wide flex items-center gap-1.5">
+                  <MapPin size={14} className="text-blue-600" /> Location
+                </label>
+                <input 
+                  type="text" 
+                  name="location" 
+                  required 
+                  placeholder="e.g. Yangon, Myanmar" 
+                  className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:bg-white focus:ring-2 focus:ring-blue-600 outline-none transition text-sm font-medium text-gray-800" 
+                />
+              </div>
+
+              {/* Job Category */}
+              <div className="space-y-1.5">
+                <label className="block text-xs font-semibold text-gray-600 uppercase tracking-wide flex items-center gap-1.5">
+                  <Layers size={14} className="text-blue-600" /> Job Category
+                </label>
+                <select 
+                  name="category_id" 
+                  required 
+                  className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:bg-white focus:ring-2 focus:ring-blue-600 outline-none transition text-sm font-medium text-gray-800 cursor-pointer"
+                >
+                  <option value="">Select a Category</option>
+                  {allcategories.map((category) => (
+                    <option key={category.id} value={category.id}>{category.name}</option>
+                  ))}
+                </select>
+              </div>
             </div>
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="space-y-2">
-              <label className="block text-sm font-medium text-gray-700">Location</label>
-              <input type="text" name="location" required placeholder="e.g. Yangon, Myanmar" className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 outline-none transition" />
+            {/* Job Description */}
+            <div className="space-y-1.5">
+              <label className="block text-xs font-semibold text-gray-600 uppercase tracking-wide flex items-center gap-1.5">
+                <FileText size={14} className="text-blue-600" /> Job Description
+              </label>
+              <textarea 
+                name="description" 
+                rows={3} 
+                required 
+                placeholder="Describe the role responsibilities, team structure, and daily tasks..." 
+                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:bg-white focus:ring-2 focus:ring-blue-600 outline-none transition text-sm font-medium text-gray-800 resize-y" 
+              />
             </div>
-            <div className="space-y-2">
-              <label className="block text-sm font-medium text-gray-700">Job Category</label>
-              <select name="category_id" required className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 outline-none transition bg-white">
-                <option value="">Select a Category</option>
-                {allcategories.map((category) => (
-                  <option key={category.id} value={category.id}>{category.name}</option>
-                ))}
-              </select>
+
+            {/* Requirements */}
+            <div className="space-y-1.5">
+              <label className="block text-xs font-semibold text-gray-600 uppercase tracking-wide flex items-center gap-1.5">
+                <CheckCircle2 size={14} className="text-blue-600" /> Requirements & Qualifications
+              </label>
+              <textarea 
+                name="requirements" 
+                rows={3} 
+                required 
+                placeholder="List necessary skills, experience levels, and qualifications..." 
+                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:bg-white focus:ring-2 focus:ring-blue-600 outline-none transition text-sm font-medium text-gray-800 resize-y" 
+              />
             </div>
-          </div>
 
-          <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700">Job Description</label>
-            <textarea name="description" rows={4} required placeholder="Describe the role responsibilities..." className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 outline-none transition" />
-          </div>
+            {/* Application Deadline */}
+            <div className="space-y-1.5">
+              <label className="block text-xs font-semibold text-gray-600 uppercase tracking-wide flex items-center gap-1.5">
+                <Calendar size={14} className="text-blue-600" /> Application Deadline
+              </label>
+              <input 
+                type="date" 
+                name="deadline" 
+                required 
+                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:bg-white focus:ring-2 focus:ring-blue-600 outline-none transition text-sm font-medium text-gray-800 cursor-pointer" 
+              />
+            </div>
 
-          <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700">Requirements</label>
-            <textarea name="requirements" rows={4} required placeholder="List necessary skills and qualifications..." className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 outline-none transition" />
-          </div>
+            {/* Submit Button */}
+            <button 
+              type="submit" 
+              className="w-full py-3.5 mt-4 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm tracking-wide rounded-2xl transition-all shadow-lg shadow-blue-600/30 flex items-center justify-center gap-2 cursor-pointer"
+            >
+              <Send size={16} /> Post Job Opening
+            </button>
+          </Form>
+        </div>
 
-          <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700">Application Deadline</label>
-            <input type="date" name="deadline" required className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 outline-none transition" />
-          </div>
-
-          <button type="submit" className="w-full py-3 mt-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all shadow-sm">
-            Post Job Opening
-          </button>
-        </Form>
       </div>
     </div>
   );

@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { NavLink, useLoaderData, Form } from 'react-router';
-
-import { Building2, MapPin, DollarSign, Calendar, CheckCircle2, ShieldAlert, FileUp } from 'lucide-react';
+import { NavLink, useLoaderData } from 'react-router';
+import { 
+  MapPin, 
+  DollarSign, 
+  Calendar, 
+  ChevronRight,
+  FileText,
+  ListChecks,
+  CheckCircle2
+} from 'lucide-react';
 import { axiosClient } from '../../axios/axiosutils';
 import { useContextHook } from '../../Context/context';
 
@@ -12,7 +19,11 @@ const AdminSpecificJob = () => {
   const { token } = useContextHook();
   const [hasApplied, setHasApplied] = useState(false);
   const [loading, setLoading] = useState(true);
-  const requirementsList = specificJob.requirements?.split('\n') || [specificJob.requirements];
+  
+  // Format requirements into a clean list, filtering out any empty strings
+  const requirementsList = specificJob.requirements
+    ? specificJob.requirements.split('\n').filter((req: string) => req.trim() !== '')
+    : [];
 
   useEffect(() => {
     if (token) {
@@ -29,24 +40,51 @@ const AdminSpecificJob = () => {
     }
   }, [token, specificJob.id]);
 
-  if (loading) return <div className="min-h-[60vh] flex items-center justify-center text-gray-400 font-medium">Loading Job Details...</div>;
+  if (loading) {
+    return (
+      <div className="min-h-[60vh] flex items-center justify-center text-gray-400 font-medium">
+        Loading Job Details...
+      </div>
+    );
+  }
 
   return (
-    <div className="max-w-4xl mx-auto p-8 space-y-8 pb-16">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-10 space-y-8">
       
-      {/* Job Header Card */}
-      <div className="bg-white p-8 rounded-3xl shadow-xs border border-gray-100 space-y-6">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-          <div>
-            <span className="px-3 py-1 bg-emerald-50 text-emerald-700 text-xs font-semibold rounded-full border border-emerald-100">Open Position</span>
-            <h1 className="text-3xl font-extrabold text-gray-900 mt-2">{specificJob.title}</h1>
+      {/* Breadcrumb Navigation */}
+      <nav className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-gray-500">
+        <NavLink to="/admin/dashboard" className="hover:text-blue-600 transition">Dashboard</NavLink>
+        <ChevronRight size={14} className="text-gray-400" />
+        <span className="text-gray-900 truncate max-w-[200px] sm:max-w-xs">{specificJob.title}</span>
+      </nav>
+
+      {/* Hero Header Card */}
+      <div className="relative bg-white border border-gray-100 rounded-3xl p-6 sm:p-10 shadow-sm overflow-hidden">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-blue-50/50 rounded-full blur-3xl -z-0 pointer-events-none" />
+        
+        <div className="relative z-10 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+          <div className="space-y-3 max-w-2xl">
+            <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-emerald-50 text-emerald-700 text-xs font-bold rounded-full border border-emerald-100 shadow-2xs">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" /> Open Position
+            </div>
+            <h1 className="text-2xl sm:text-4xl font-extrabold text-gray-900 tracking-tight leading-tight">
+              {specificJob.title}
+            </h1>
           </div>
           
-          <div className="flex items-center gap-3 bg-gray-50 px-4 py-2.5 rounded-2xl border border-gray-100">
-            <img src={company.logo} alt={company.name} className="w-10 h-10 object-contain rounded-xl bg-white p-1 border border-gray-100" />
-            <div>
-              <p className="text-xs text-gray-400 font-semibold uppercase">Company</p>
-              <NavLink to={`/admin/adminspecificCompany/${company.id}`} className="text-sm font-bold text-blue-600 hover:underline">
+          {/* Company Badge Card */}
+          <div className="flex items-center gap-4 bg-gray-50/85 backdrop-blur-sm p-4 rounded-2xl border border-gray-200/60 shadow-xs w-full lg:w-auto">
+            <img 
+              src={company.logo} 
+              alt={company.name} 
+              className="w-12 h-12 object-contain rounded-xl bg-white p-1 border border-gray-100 shadow-2xs shrink-0" 
+            />
+            <div className="min-w-0">
+              <p className="text-[10px] text-gray-400 font-extrabold uppercase tracking-wider">Company</p>
+              <NavLink 
+                to={`/admin/adminspecificCompany/${company.id}`} 
+                className="text-sm font-bold text-blue-600 hover:text-blue-700 hover:underline transition truncate block"
+              >
                 {company.name}
               </NavLink>
             </div>
@@ -54,91 +92,85 @@ const AdminSpecificJob = () => {
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-gray-100">
-          <div className="p-4 bg-gray-50/60 rounded-2xl border border-gray-100 flex items-center gap-3">
-            <div className="p-2.5 bg-blue-50 text-blue-600 rounded-xl"><MapPin size={20} /></div>
-            <div>
-              <p className="text-xs text-gray-400 font-medium">Location</p>
-              <p className="text-sm font-bold text-gray-900">{specificJob.location || "Remote / N/A"}</p>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8 pt-8 border-t border-gray-100">
+          <div className="p-4 bg-gray-50/60 rounded-2xl border border-gray-100/80 flex items-center gap-3.5">
+            <div className="p-3 bg-blue-50 text-blue-600 rounded-xl shrink-0"><MapPin size={20} /></div>
+            <div className="min-w-0">
+              <p className="text-xs text-gray-400 font-semibold uppercase tracking-wider">Location</p>
+              <p className="text-sm font-bold text-gray-900 truncate">{specificJob.location || "Remote / N/A"}</p>
             </div>
           </div>
 
-          <div className="p-4 bg-gray-50/60 rounded-2xl border border-gray-100 flex items-center gap-3">
-            <div className="p-2.5 bg-emerald-50 text-emerald-600 rounded-xl"><DollarSign size={20} /></div>
-            <div>
-              <p className="text-xs text-gray-400 font-medium">Salary Offer</p>
-              <p className="text-sm font-bold text-gray-900">${specificJob.salary?.toLocaleString() || "Negotiable"}</p>
+          <div className="p-4 bg-gray-50/60 rounded-2xl border border-gray-100/80 flex items-center gap-3.5">
+            <div className="p-3 bg-emerald-50 text-emerald-600 rounded-xl shrink-0"><DollarSign size={20} /></div>
+            <div className="min-w-0">
+              <p className="text-xs text-gray-400 font-semibold uppercase tracking-wider">Salary Offer</p>
+              <p className="text-sm font-bold text-gray-900 truncate">
+                {specificJob.salary ? `$${specificJob.salary.toLocaleString()}` : "Negotiable"}
+              </p>
             </div>
           </div>
 
-          <div className="p-4 bg-gray-50/60 rounded-2xl border border-gray-100 flex items-center gap-3">
-            <div className="p-2.5 bg-rose-50 text-rose-600 rounded-xl"><Calendar size={20} /></div>
-            <div>
-              <p className="text-xs text-gray-400 font-medium">Deadline</p>
-              <p className="text-sm font-bold text-rose-600">{specificJob.deadline || "No deadline"}</p>
+          <div className="p-4 bg-gray-50/60 rounded-2xl border border-gray-100/80 flex items-center gap-3.5">
+            <div className="p-3 bg-rose-50 text-rose-600 rounded-xl shrink-0"><Calendar size={20} /></div>
+            <div className="min-w-0">
+              <p className="text-xs text-gray-400 font-semibold uppercase tracking-wider">Deadline</p>
+              <p className="text-sm font-bold text-rose-600 truncate">{specificJob.deadline || "No deadline"}</p>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Description & Requirements Section */}
-      <div className="bg-white p-8 rounded-3xl shadow-xs border border-gray-100 space-y-6">
-        <div>
-          <h3 className="font-bold text-gray-900 text-base mb-2">Job Description</h3>
-          <p className="text-gray-600 text-sm leading-relaxed">{specificJob.description}</p>
+      {/* Combined Single Card Container for Description & Requirements Serially */}
+      <div className="bg-white border border-gray-100 rounded-3xl p-6 sm:p-10 shadow-sm space-y-10">
+        
+        {/* Job Description Subsection */}
+        <div className="space-y-4">
+          <div className="flex items-center gap-3 pb-3 border-b border-gray-100">
+            <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shadow-2xs">
+              <FileText size={20} />
+            </div>
+            <div>
+              <h2 className="text-lg font-bold text-gray-900">About the Role</h2>
+              <p className="text-xs text-gray-400">Overview and core responsibilities</p>
+            </div>
+          </div>
+          
+          <div className="text-gray-600 text-sm sm:text-base leading-relaxed whitespace-pre-line break-words pl-1">
+            {specificJob.description}
+          </div>
         </div>
 
-        <div className="pt-4 border-t border-gray-100">
-          <h3 className="font-bold text-gray-900 text-base mb-3">Key Requirements</h3>
-          <ul className="space-y-2">
-            {requirementsList.map((req: string, index: number) => (
-              <li key={index} className="flex items-start gap-2.5 text-sm text-gray-600">
-                <span className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 shrink-0" />
-                <span>{req}</span>
-              </li>
-            ))}
-          </ul>
+        {/* Divider between sections */}
+        <div className="border-t border-gray-100 pt-2" />
+
+        {/* Key Requirements Subsection */}
+        <div className="space-y-4">
+          <div className="flex items-center gap-3 pb-3 border-b border-gray-100">
+            <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shadow-2xs">
+              <ListChecks size={20} />
+            </div>
+            <div>
+              <h2 className="text-lg font-bold text-gray-900">Requirements & Qualifications</h2>
+              <p className="text-xs text-gray-400">Skills and criteria needed</p>
+            </div>
+          </div>
+
+          {requirementsList.length > 0 ? (
+            <ul className="space-y-3 pt-1">
+              {requirementsList.map((req: string, index: number) => (
+                <li key={index} className="flex items-start gap-3 text-sm text-gray-700 bg-gray-50/60 p-4 rounded-2xl border border-gray-100 leading-normal break-words">
+                  <CheckCircle2 size={18} className="text-emerald-600 shrink-0 mt-0.5" />
+                  <span className="flex-grow font-medium">{req}</span>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-sm text-gray-400 italic bg-gray-50/60 p-4 rounded-2xl border border-gray-100">No specific requirements mentioned.</p>
+          )}
         </div>
+
       </div>
-
-      {/* Application Actions */}
-      {/* <div className="bg-white p-8 rounded-3xl shadow-xs border border-gray-100">
-        {!token ? (
-          <div className="text-center py-6 bg-gray-50 rounded-2xl border border-dashed border-gray-200 flex flex-col items-center gap-2">
-            <ShieldAlert size={24} className="text-amber-500" />
-            <p className="text-gray-600 text-sm font-medium">Please login to submit your application for this position.</p>
-          </div>
-        ) : hasApplied ? (
-          <div className="flex items-center justify-center gap-2 p-4 bg-emerald-50 text-emerald-700 rounded-2xl border border-emerald-100 text-sm font-bold">
-            <CheckCircle2 size={18} /> You have already applied for this job.
-          </div>
-        ) : (
-          <div className="space-y-4">
-            <h2 className="text-lg font-bold text-gray-900">Submit Your Application</h2>
-            <Form method="post" encType="multipart/form-data" className="space-y-4">
-              <input type="hidden" name="job_id" value={specificJob.id} />
-              
-              <div>
-                <label className="block text-xs font-semibold text-gray-400 uppercase mb-1.5">Upload CV / Resume (PDF)</label>
-                <input 
-                  type="file" 
-                  name="cv_path" 
-                  accept=".pdf,.doc,.docx"
-                  required 
-                  className="w-full p-2.5 border border-gray-200 rounded-xl text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 cursor-pointer" 
-                />
-              </div>
-
-              <button 
-                type="submit"
-                className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm rounded-xl shadow-xs transition flex items-center justify-center gap-2 cursor-pointer"
-              >
-                <FileUp size={16} /> Submit Application
-              </button>
-            </Form>
-          </div>
-        )}
-      </div> */}
 
     </div>
   );
