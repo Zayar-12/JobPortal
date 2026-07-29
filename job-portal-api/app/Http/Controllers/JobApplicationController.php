@@ -13,7 +13,10 @@ class JobApplicationController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index() {}
+    public function index() {
+        $jobApplications=JobApplication::latest()->paginate(10);
+        return JobAppllicationResource::collection($jobApplications);
+    }
 
     /**
      * Store a newly created resource in storage.

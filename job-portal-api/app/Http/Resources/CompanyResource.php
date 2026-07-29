@@ -24,6 +24,7 @@ class CompanyResource extends JsonResource
     "location"=>$this->location,
     "website"=>$this->website,
     "status"=>$this->status,
+    "total_applications_count" => $this->whenNotNull($this->total_applications_count),
     "uploaded_jobs"=>JobResource::collection($this->whenLoaded('jobs'))
     
         ];

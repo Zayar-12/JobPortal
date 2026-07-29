@@ -37,3 +37,17 @@ try {
     }
 
  }
+
+//  export const fetchJobApplications = async (page = 1) => {
+//   const response = await fetch(`/api/jobApplication?page=${page}`, {
+//     headers: {
+//       'Accept': 'application/json',
+      
+//       'Authorization': `Bearer ${localStorage.getItem('token')}`
+//     }
+//   });
+//   if (!response.ok) {
+//     throw new Error('Failed to fetch job applications');
+//   }
+//   return await response.json();
+// };

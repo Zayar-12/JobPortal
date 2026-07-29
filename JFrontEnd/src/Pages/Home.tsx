@@ -155,11 +155,12 @@ const Home = () => {
                 >
                   <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-500 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity" />
                   
-                  <div className="w-16 h-16 bg-gray-50 p-2 rounded-2xl border border-gray-100 shadow-sm flex items-center justify-center group-hover:scale-110 transition-transform">
+                  {/* Company Logo - Larger size (w-24 h-24) */}
+                  <div className="w-24 h-24 bg-gray-50 p-3 rounded-2xl border border-gray-100 shadow-sm flex items-center justify-center group-hover:scale-105 transition-transform">
                     {comp.logo ? (
                       <img src={comp.logo} alt={comp.name} className="w-full h-full object-contain rounded-xl" />
                     ) : (
-                      <Building2 size={28} className="text-gray-400" />
+                      <Building2 size={36} className="text-gray-400" />
                     )}
                   </div>
 
@@ -214,11 +215,12 @@ const Home = () => {
                 >
                   <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-500 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity" />
 
-                  <div className="w-16 h-16 bg-gradient-to-br from-blue-50/80 to-indigo-50/80 p-1.5 rounded-2xl border border-blue-100/60 shadow-md flex items-center justify-center group-hover:scale-110 group-hover:bg-blue-100 transition-all duration-300">
+                  {/* Category Icon - Larger size (w-20 h-20) */}
+                  <div className="w-20 h-20 bg-gradient-to-br from-blue-50/80 to-indigo-50/80 p-2.5 rounded-2xl border border-blue-100/60 shadow-md flex items-center justify-center group-hover:scale-105 group-hover:bg-blue-100 transition-all duration-300">
                     {cat.icon ? (
-                      <img src={cat.icon} alt={cat.name} className="w-full h-full object-contain rounded-xl scale-110" />
+                      <img src={cat.icon} alt={cat.name} className="w-full h-full object-contain rounded-xl" />
                     ) : (
-                      <FolderKanban size={30} className="text-blue-600" />
+                      <FolderKanban size={36} className="text-blue-600" />
                     )}
                   </div>
 

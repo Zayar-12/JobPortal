@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CompanyResource;
 use App\Http\Resources\JobResource;
 use App\Models\Job;
 use App\Models\JobApplication;
@@ -14,7 +15,7 @@ class UserJobController extends Controller
      */
     public function index()
     {
-        $latest20Jobs = Job::with('company')->where('status', 'accepted')->latest()->paginate(3);
+        $latest20Jobs = Job::with('company')->where('status', 'accepted')->latest()->paginate(5);
 
         return JobResource::collection($latest20Jobs);
     }
@@ -22,7 +23,7 @@ class UserJobController extends Controller
     public function topCompanies()
     {
         $topCompanies = \App\Models\Company::withCount(['jobs as total_applications_count' => function ($query) {
-            $query->join('job_applications', 'jobs.id', '=', 'job_applications.job_id');
+            $query->has('jobApplications');
         }])
             ->orderByDesc('total_applications_count')
             ->take(5)
@@ -30,7 +31,7 @@ class UserJobController extends Controller
 
         return response()->json([
             'success' => true,
-            'data' => $topCompanies
+            'data' => CompanyResource::collection($topCompanies)
         ]);
     }
 

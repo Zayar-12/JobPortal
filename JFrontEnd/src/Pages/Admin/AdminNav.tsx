@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router';
-import { LayoutDashboard, FolderPlus, Building2, Briefcase, LogOut } from 'lucide-react';
+// FileText ကို lucide-react မှ ထည့်သွင်းပါ
+import { LayoutDashboard, FolderPlus, Building2, Briefcase, LogOut, FileText } from 'lucide-react';
 import { useContextHook } from '../../Context/context';
 import { logout } from '../../utils/auth';
 
@@ -73,6 +74,18 @@ const AdminNav = () => {
             }
           >
             <Briefcase size={18} /> Pending Jobs
+          </NavLink>
+
+          {/* Job Applications NavLink အသစ် */}
+          <NavLink 
+            to="/admin/job-applications" 
+            className={({ isActive }) => 
+              `px-4 py-3 rounded-2xl text-sm font-semibold transition flex items-center gap-3 ${
+                isActive ? 'bg-blue-50 text-blue-600' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+              }`
+            }
+          >
+            <FileText size={18} /> Job Applications
           </NavLink>
         </nav>
       </div>

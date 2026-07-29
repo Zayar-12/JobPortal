@@ -39,6 +39,8 @@ import AdminSpecificCompany from './Pages/Admin/AdminSpecificCompany'
 import AdminSpecificJob from './Pages/Admin/AdminSpecificJob'
 import PendingCompanies from './Pages/Admin/PendingCompanies'
 import PendingJobs from './Pages/Admin/PendingJobs'
+import AdminJobApplications from './Pages/Admin/Adminjobapplications'
+import { adminJobApplicationsLoader } from './Loaders/admin'
 
 
 const App = () => {
@@ -171,6 +173,11 @@ const App = () => {
     { path: "adminspecificJob/:id", element: <AdminSpecificJob />, loader:loadSpecificJob, },
      { path: "pendingcompanies", element: <PendingCompanies />,  },
       { path: "pendingjobs", element: <PendingJobs />, },
+      { 
+        path: "job-applications", 
+        element: <AdminJobApplications />, 
+        loader: adminJobApplicationsLoader 
+      },
 
     ]
    }
