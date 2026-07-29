@@ -1,4 +1,4 @@
-# JobPortal - Full-Stack Job Board Web Application
+
 
 A modern, full-featured job portal web application inspired by platforms like JobNet, developed to bridge the gap between job seekers, employers, and administrators.
 
@@ -42,26 +42,31 @@ A modern, full-featured job portal web application inspired by platforms like Jo
 ### 1. Home & Discovery
 *Explore top hiring companies, browse industries by category, and view fresh job listings with pagination.*
 - **Landing & Categories View**:
-  ![Landing Page](Screenshot%202026-07-29%20153557.png)
+  ![Landing Page](https://github.com/user-attachments/assets/280e4e5f-4a76-458e-b7b4-3ac1f16f5aec)
+ ![categories section](https://github.com/user-attachments/assets/76d6cb02-d45a-437c-a6ff-df7e256d09bf)
 - **Latest Opportunities**:
-  ![Latest Opportunities](Screenshot%202026-07-29%20153606.png)
+  ![Latest Opportunities](https://github.com/user-attachments/assets/0b98a90d-b24f-4b8c-878f-e73e4598b012)
 
 ### 2. Job Details & Application
 *Inspect comprehensive job specifications, company info, and submit your CV application.*
 - **Job Overview & Details**:
-  ![Job Details 1](Screenshot%202026-07-29%20153725.png)
+  ![Job Details 1](https://github.com/user-attachments/assets/622b6848-cd8b-43cd-b51d-61ca279b38d6)
+
 - **Application Upload Form**:
-  ![Job Details 2](Screenshot%202026-07-29%20153731.png)
+  ![Job Details 2](https://github.com/user-attachments/assets/ad39d4b0-9953-497b-9d82-f81e763da2f9)
+
+- **Company Overview & Details**:
+  ![Company Details 1](https://github.com/user-attachments/assets/2e29c0cc-d567-4789-a287-32f03eaa3abe)
 
 ### 3. Employer Portal
 *Post new job openings efficiently with detailed requirements and salary ranges.*
 - **Post a New Job Opening**:
-  ![Employer Post Job](Screenshot%202026-07-29%20152446.png)
+  ![Employer Post Job](https://github.com/user-attachments/assets/e860b47e-d57d-49f1-9c8f-a0e2b3dbc292)
 
 ### 4. Admin Portal
 *Manage and moderate pending platform requests such as pending job approvals.*
 - **Pending Job Approvals Dashboard**:
-  ![Admin Pending Jobs](Screenshot%202026-07-29%20153327.png)
+  ![Admin Pending Jobs](https://github.com/user-attachments/assets/dd4d9249-325e-4fce-9f8a-59171a11fd06)
 
 ---
 
