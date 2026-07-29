@@ -53,20 +53,36 @@ A modern, full-featured job portal web application inspired by platforms like Jo
   ![Job Details 1](https://github.com/user-attachments/assets/622b6848-cd8b-43cd-b51d-61ca279b38d6)
 
 - **Application Upload Form**:
-  ![Job Details 2](https://github.com/user-attachments/assets/ad39d4b0-9953-497b-9d82-f81e763da2f9)
+  ![Job Details 2](  https://github.com/user-attachments/assets/ad39d4b0-9953-497b-9d82-f81e763da2f9)
 
 - **Company Overview & Details**:
   ![Company Details 1](https://github.com/user-attachments/assets/2e29c0cc-d567-4789-a287-32f03eaa3abe)
 
 ### 3. Employer Portal
 *Post new job openings efficiently with detailed requirements and salary ranges.*
-- **Post a New Job Opening**:
+- **Employer Home page**:
+  ![Employer Post Job](https://github.com/user-attachments/assets/77bc916e-beb2-4a8b-8d94-fee45f8cdb84)
+  - **Employer Dash board**:
+  ![Employer Post Job](https://github.com/user-attachments/assets/e525dd9f-214b-48ea-b989-c3dd12bd7c0e)
+ ![Employer Post Job](https://github.com/user-attachments/assets/86856bab-2cbe-4011-81a6-4ce4696aaf36)
+  - **See Job Applicant in each job and Edit the job**:
+  ![Employer Post Job](https://github.com/user-attachments/assets/ed5cf49b-de3e-41cf-af81-46c697e22ba7)
+  - **Post a New Job Opening**:
   ![Employer Post Job](https://github.com/user-attachments/assets/e860b47e-d57d-49f1-9c8f-a0e2b3dbc292)
 
 ### 4. Admin Portal
 *Manage and moderate pending platform requests such as pending job approvals.*
-- **Pending Job Approvals Dashboard**:
+- **Admin  Dashboard  can see all users ,companies,jobs**:
   ![Admin Pending Jobs](https://github.com/user-attachments/assets/dd4d9249-325e-4fce-9f8a-59171a11fd06)
+  - **Adding categories page**:
+  ![Admin Pending Jobs](https://github.com/user-attachments/assets/6e03337a-be31-4e83-a2cb-3865705dab87)
+  - **see all job applications**:
+  ![Admin Pending Jobs](https://github.com/user-attachments/assets/258c7cef-339f-419e-bf89-f556d9bb579b)
+  - **Pending companies page**:
+  ![Admin Pending Jobs](https://github.com/user-attachments/assets/5c13a9f4-4f2a-469a-8538-c7797dafde2d)
+  - **Pending Job Approvals Dashboard**:
+  ![Admin Pending Jobs](https://github.com/user-attachments/assets/dd4d9249-325e-4fce-9f8a-59171a11fd06)
+  
 
 ---
 
